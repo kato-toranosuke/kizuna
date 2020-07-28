@@ -1,0 +1,2 @@
+class Nanao < ApplicationRecord
+end

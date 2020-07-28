@@ -1,0 +1,173 @@
+ create_table :nanaos do |t|
+      t.string :name
+      t.string :alcohol
+      t.string :mask
+      t.timestamps
+ end
+
+Nanao.create(name:"ラーメン二郎", alcohol:"なし", mask:"指定あり")
+Nanao.create(name:"龍郎", alcohol:"あり", mask:"指定なし" )
+Nanao.create(name:"松屋", alcohol:"あり", mask:"指定なし" )
+Nanao.create(name:"サイゼリヤ", alcohol:"なし", mask:"指定あり" )
+Nanao.create(name:"ガスト", alcohol:"あり", mask:"指定あり" )
+
+
+
+
+
+create_table :nanaos do |t|
+     t.string :name
+     t.string :address
+     t.boolean :alcohol
+     t.boolean :mask
+     t.boolean :time
+     t.boolean :takeout
+     t.boolean :touchless
+     t.boolean :card
+     t.boolean :linepay
+     t.boolean :paypay
+     t.boolean :id
+     t.boolean :quicpay
+     t.boolean :seat
+     t.boolean :contact
+     t.boolean :toilet
+     t.boolean :airing
+     t.boolean :outdoor
+     t.boolean :temp
+     t.string :atom
+     t.boolean :plate
+     t.float :rate
+     t.timestamps
+end
+
+Nanao.create(name:"ラーメン二郎",
+            address:"東京都港区三田２丁目１６番地４",
+            alcohol:0,
+            mask:0, 
+            time:0,
+            takeout:0,
+            touchless:0,
+            card:0,
+            linepay:0,
+            paypay:0,
+            id:0,
+            quicpay:0,
+            seat:1,
+            contact:0,
+            toilet:1,
+            airing:1,
+            outdoor:0,
+            temp:0,
+            atom:"騒がしい",
+            plate:0,
+            rate:0.4)
+
+Nanao.create(name:"麺theTOKYO",
+            address:"茨城県つくば市天久保３丁目１５?４ 丸三大学中央商店街",
+            alcohol:1,
+            mask:0, 
+            time:1,
+            takeout:0,
+            touchless:1,
+            card:0,
+            linepay:1,
+            paypay:1,
+            id:1,
+            quicpay:0,
+            seat:1,
+            contact:0,
+            toilet:0,
+            airing:1,
+            outdoor:1,
+            temp:1,
+            atom:"静か",
+            plate:1,
+            rate:3.0)
+
+Nanao.create(name:"ジョイフル つくば桜店",
+            address:"茨城県つくば市桜１丁目１４番地３",
+            alcohol:1,
+            mask:1, 
+            time:1,
+            takeout:1,
+            touchless:0,
+            card:0,
+            linepay:0,
+            paypay:0,
+            id:0,
+            quicpay:0,
+            seat:1,
+            contact:1,
+            toilet:0,
+            airing:0,
+            outdoor:1,
+            temp:"普通",
+            atom:0,
+            plate:1,
+            rate:2.3)
+
+Nanao.create(name:"むじゃき",
+            address:"",
+            alcohol:,
+            mask:, 
+            time:,
+            takeout:,
+            touchless:,
+            card:,
+            linepay:,
+            paypay:,
+            id:,
+            quicpay:,
+            seat:,
+            contact:,
+            toilet:,
+            airing:,
+            outdoor:,
+            temp:,
+            atom:,
+            plate:,
+            rate: )
+
+Nanao.create(name:"",
+            address:"------------------------",
+            alcohol:,
+            mask:, 
+            time:,
+            takeout:,
+            touchless:,
+            card:,
+            linepay:,
+            paypay:,
+            id:,
+            quicpay:,
+            seat:,
+            contact:,
+            toilet:,
+            airing:,
+            outdoor:,
+            temp:,
+            atom:,
+            plate:,
+            rate: )
+
+Nanao.create(name:"",
+            address:"------------------------",
+            alcohol:,
+            mask:, 
+            time:,
+            takeout:,
+            touchless:,
+            card:,
+            linepay:,
+            paypay:,
+            id:,
+            quicpay:,
+            seat:,
+            contact:,
+            toilet:,
+            airing:,
+            outdoor:,
+            temp:,
+            atom:,
+            plate:,
+            rate: )

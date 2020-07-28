@@ -1,0 +1,28 @@
+<h1 class="title has-text-centered">一覧</h1>
+
+<%= form_with url: 'search', method: :get, local: true do |f| %>
+    <%= f.text_field :name %>
+    <%= f.submit :search %>
+  <% end %>
+
+
+<table class="table is-striped" style="margin-left: auto; margin-right: auto;">
+  <thead>
+      <tr>
+          <th>店名</th>
+          <th>住所</th>
+          <th>マスク着用</th>
+          <th>アルコール消毒の有無</th>
+      </tr>
+  </thead>
+  <tbody>
+      <% @rests.each do |rest| %>
+          <tr>
+              <th><%= rest.name %></th>
+              <th><%= rest.address %></th>
+              <th><%= rest.mask %></th>
+              <th><%= rest.alcohol %></th>
+          </tr>
+      <% end %>
+  </tbody>
+</table>
