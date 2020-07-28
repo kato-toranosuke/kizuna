@@ -8,6 +8,10 @@
 </head>
 
 <body>
+ <div class="star-rating">
+  <div class="star-rating-front" style="width: <%= rest.rate * 20 %>%">★★★★★</div>
+  <div class="star-rating-back">★★★★★</div>
+</div>
 <%= form_with url: 'welcome/search', method: :get, local: true do |f| %>
     店名検索：<%= f.text_field :name %><br/>
     アルコールの有無：<%= f.check_box :alcohol %><br/>
