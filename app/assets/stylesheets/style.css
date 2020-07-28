@@ -68,3 +68,16 @@ summary
 {
     outline: none;
 }
+
+
+/*
+div.columns {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+div.column {
+    flex-basis: 33%;
+    min-width: 33%;
+}
+*/
