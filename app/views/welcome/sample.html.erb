@@ -2,26 +2,80 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
     <link rel="stylesheet" href="style.css">
-    <%= stylesheet_pack_tag 'application' %>
     <title>team Kizuna </title>
-</head>
 
+    <!-- material design icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+        /*星評価*/
+        .star-rating
+        {
+            font-size: 25px;
+
+            position: relative;
+
+            width: 5em;
+            height: 1em;
+        }
+        .star-rating-front
+        {
+            position: absolute;
+            top: 1;
+            left: 0;
+
+            overflow: hidden;
+
+            color: #fc3;
+        }
+        .star-rating-back
+        {
+            color: #ccc;
+        }
+
+        /* オープン時にアニメーションを設定 */
+        details[open] .details-content
+        {
+            animation: fadeIn 1.5s ease;
+        }
+        @keyframes fadeIn
+        {
+            0%
+            {
+                transform: translateY(-10px); /*上から表示*/
+                opacity: 0; /* 透明 */
+            }
+            100%
+            {
+                transform: none;
+                opacity: 1;
+            }
+        }
+
+        /* 詳細表示のクリック時のアウトラインを消す */
+        summary
+        {
+            outline: none;
+        }
+    </style>
+</head>
 <body>
- <section class="hero is-primary">
+    <section class="hero is-primary">
     <div class="hero-body">
         <div class="container">
             <h1 class="title is-1 has-text-left">Kizuna</h1>
             <p>~安心安全の外食をお届け~</p>
             
             <div class="has-text-right">
-                <%= form_with url: 'search', method: :get, local: true do |f| %>
+                <%= form_with url: 'welcome/search', method: :get, local: true do |f| %>
                     <%= f.label :name, "店舗名：" %>
-                    <%= f.text_field :name%>
+                    <%= f.text_field :name, {class: input} %>
                     
                     <%# チェックボックス %>
                     <%= f.label :mask, "マスク：" %>
-                    <%= f.check_box :mask%>
+                    <%= f.check_box :mask, {class: input}, 1, 0 %>
 
                     <%= f.submit :search %>
                 <% end %>
@@ -29,32 +83,37 @@
         </div>
     </div>
     </section>
-
-<section class="section">
+    
+    
+    <section class="section">
         <div class="container">
+            <a class="button" href="./index.html">Top</a>
             <div class="columns is-variable is-8">
-         　 <%# あり・なし表示をする関数を定義 %>
+
+            <%# あり・なし表示をする関数を定義 %>
             <%
                 def display_yn(value)
-                    if value then
-                        return "あり"
-                    else
+                    if value == 0 then
                         return "なし"
+                    else
+                        return "あり"
                     end
                 end
             %>
-             <%# 各行ごと（店舗ごと）に表を作成 %>
+            
+            <%# 各行ごと（店舗ごと）に表を作成 %>
             <% @rests.each do |rest| %>
-                <div class="column is-one-third-widescreen is-one-third-desktop is-full-tablet is-inline-block mb-4">
+                <div class="column is-one-third-widescreen is-full-tablet is-inline-block mb-4">
                     <%#　見出し %>
                     <h1 class="title"><%= rest.name %></h1>
                     <h1 class="subtitle"><%= rest.address %></h1>
-                     <%# 重要項目の表 %>
+                    
+                    <%# 重要項目の表 %>
                     <table class="table is-fullwidth is-striped">
                         <%# 衛生状況に対する顧客の満足度 %>
                         <tr>
                             <td>
-                                <i class="material-icons">mood</i>
+                                <span class="material icons">mood</span>
                                 衛生状況に対する顧客の満足度
                             </td>
                             <td>
@@ -63,16 +122,17 @@
                                 <div class="star-rating-back">★★★★★</div></div>
                             </td>
                         </tr>
-                         <%# マスク %>
+
+                        <%# マスク %>
                         <tr>
                             <td>
                                 <span class="material-icons">masks</span>
                                 客のマスク着用
                             </td>
                             <td>
-                                <% if rest.mask == false then %>
+                                <% if rest.mask == 0 then %>
                                     指定なし
-                                <% elsif rest.mask == true then %>
+                                <% elsif rest.mask == 1 then %>
                                     必須
                                 <% else %>
                                     推奨
@@ -86,10 +146,10 @@
                                 短縮営業
                             </td>
                             <td>
-                                <% if rest.time == false then %>
+                                <% if rest.time == -1 then %>
                                     なし
                                 <% else %>
-                                    あり
+                                    <%= rest.time %> まで
                                 <% end %>
                             </td>
                         </tr>
@@ -104,7 +164,8 @@
                             </td>
                         </tr>
                     </table>
-                     <%# 詳細項目 %>
+
+                    <%# 詳細項目 %>
                     <details>
                         <summary>詳細</summary>
                     <table class="table is-fullwidth is-striped details-content">
@@ -114,7 +175,7 @@
                                 アルコール消毒
                             </td>
                             <td>
-                                <%= display_yn(rest.alcohol) %>
+                                <%= display_yn(rest.takeout) %>
                             </td>
                         </tr>
                         <%# タッチレス決済 %>
@@ -192,7 +253,15 @@
                                 <%= display_yn(rest.toilet) %>
                             </td>
                         </tr>
-                        
+                        <%# 従業員との接触 %>
+                        <tr>
+                            <td>
+                                従業員との接触
+                            </td>
+                            <td>
+                                <%= display_yn(rest.contact) %>
+                            </td>
+                        </tr>
                         <%# 自然換気 %>
                         <tr>
                             <td>
@@ -226,7 +295,7 @@
                                 店内の雰囲気
                             </td>
                             <td>
-                                <%= rest.atom %>
+                                <%= display_yn(rest.atom) %>
                             </td>
                         </tr>
                         <%# 仕切り板の有無 %>
@@ -240,63 +309,34 @@
                         </tr>
                         </table>
 
+
+
+                        <form method="">
+                            <input type="hidden" name="store_name" value="">
+                            <select name="rate">
+                                <option value="1">5</option>
+                                <option value="1">4</option>
+                                <option value="1">3</option>
+                                <option value="1">2</option>
+                                <option value="1">1</option>
+                            </select>
+                            <input type="submit" class="button">衛生状況を評価する
+                        </form>
+
                         <%= form_with url: 'result', method: :get, local: true do |f| %>
                             <%= f.select :user_rate, [["5", 5],["4", 4],["3", 3],["2",2],["1",1]] %>
                             <%= f.submit :submit %>
                         <% end %>
 
                         </details>
+                    
                 </div>
-                
             <% end %>
+
+
+
             </div>
         </div>
-</section>
-
-<%= form_with url: 'welcome/search', method: :get, local: true do |f| %>
-    店名検索：<%= f.text_field :name %><br/>
-    アルコールの有無：<%= f.check_box :alcohol %><br/>
-    マスク：<%= f.check_box :mask %><br/>
-    営業時間：<%= f.check_box :time %><br/>
-    テイクアウト：<%= f.check_box :takeout %><br/>
-    タッチレス：<%= f.check_box :touchless %><br/>
-    カード：<%= f.check_box :card %><br/>
-    Linepay：<%= f.check_box :linepay %><br/>
-    Paypay：<%= f.check_box :paypay %><br/>
-    payid：<%= f.check_box :payid %><br/>
-    quicpay：<%= f.check_box :quicpay %><br/>
-    座席間隔：<%= f.check_box :seat %><br/>
-    従業員との接触：<%= f.check_box :contact %><br/>
-    トイレの有無：<%= f.check_box :toilet %><br/>
-    自然換気：<%= f.check_box :airing %><br/>
-    屋外の席：<%= f.check_box :outdoor %><br/>
-    体温測定：<%= f.check_box :temp %><br/>
-    店内の雰囲気：<%= f.check_box :atom %><br/>
-    仕切り板の有無：<%= f.check_box :plate %><br/>
-    衛生状況に対する顧客の満足度：<%= f.check_box :rate %><br/>
-
-    <%= f.submit :search %>
-  <% end %>
-
-<table class="table is-striped" style="margin-left: auto; margin-right: auto;">
-    <thead>
-        <tr>
-            <th>店名</th>
-            <th>住所</th>
-            <th>マスク着用</th>
-            <th>アルコール消毒の有無</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @rests.each do |rest| %>
-            <tr>
-                <th><%= rest.name %></th>
-                <th><%= rest.address %></th>
-                <th><%= rest.mask %></th>
-                <th><%= rest.alcohol %></th>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+    </section>
 </body>
 </html>
