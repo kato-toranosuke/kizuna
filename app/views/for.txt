@@ -1,0 +1,9 @@
+a=""
+if params[:mask].present? || params[:mask].present? ||params[:mask].present?
+    if params[:mask].present?
+        a+="mask: true"
+    if params[:takeout].present?
+        a+="takeout: true"
+    if params[:touchless].present?
+        a+="touchless: true"
+    @rests = Nanao.where(a)
