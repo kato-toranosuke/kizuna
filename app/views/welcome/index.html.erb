@@ -12,16 +12,23 @@
     <div class="hero-body">
         <div class="container">
             <h1 class="title is-1 has-text-left">Kizuna</h1>
-            <p>~安心安全の外食をお届け~</p>
+            <h1 class="subtitle">~安心安全の外食をお届け~</h1>
             
             <div class="has-text-right">
-                <%= form_with url: 'search', method: :get, local: true do |f| %>
+                <%= form_with url: '/welcome/search', method: :get, local: true do |f| %>
                     <%= f.label :name, "店舗名：" %>
                     <%= f.text_field :name%>
                     
                     <%# チェックボックス %>
-                    <%= f.label :mask, "マスク：" %>
-                    <%= f.check_box :mask%>
+
+                    <%= f.label :takeout, "テイクアウト：" %>
+                    <%= f.check_box :takeout, {include_hidden: false} %>
+
+                    <%= f.label :touchless, "タッチレス決済：" %>
+                    <%= f.check_box :touchless, {include_hidden: false} %>
+                    
+                    <%= f.label :mask, "マスク必須：" %>
+                    <%= f.check_box :mask, {include_hidden: false} %>
 
                     <%= f.submit :search %>
                 <% end %>
@@ -105,7 +112,7 @@
                     </table>
                      <%# 詳細項目 %>
                     <details>
-                        <summary>詳細</summary>
+                        <summary><strong>詳細</strong></summary>
                     <table class="table is-fullwidth is-striped details-content">
                         <%# アルコール消毒 %>
                         <tr>

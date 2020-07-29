@@ -1,22 +1,11 @@
 @charset 'utf-8';
 .star-rating
 {
-    font-size: 25px;
-
-    position: relative;
-
-    width: 5em;
-    height: 1em;
+    font-size: 25px;  position: relative;  width: 5em;  height: 1em;
 }
 .star-rating-front
 {
-    position: absolute;
-    top: 1;
-    left: 0;
-
-    overflow: hidden;
-
-    color: #fc3;
+    position: absolute;  top: 1;  left: 0;  overflow: hidden;  color: #fc3;
 }
 .star-rating-back
 {
@@ -32,15 +21,11 @@ details[open] .details-content
 {
     0%
     {
-        transform: translateY(-10px); /*上から表示*/
-
-        opacity: 0; /* 透明 */
+        transform: translateY(-10px); /*上から表示*/  opacity: 0; /* 透明 */
     }
     100%
     {
-        transform: none;
-
-        opacity: 1;
+        transform: none;  opacity: 1;
     }
 }
 /* クローズ時にアニメーションを設定 */
@@ -52,15 +37,11 @@ details:not([open]) .details-content
 {
     0%
     {
-        transform: none; /*上から表示*/
-
-        opacity: 1; /* 透明 */
+        transform: none; /*上から表示*/  opacity: 1; /* 透明 */
     }
     100%
     {
-        transform: translateY(-10px);
-
-        opacity: 0;
+        transform: translateY(-10px);  opacity: 0;
     }
 }
 
@@ -69,6 +50,15 @@ summary
     outline: none;
 }
 
+div.columns
+{
+    display: flex;  flex-wrap: wrap;  justify-content: center;
+}
+
+div.column
+{
+    flex: 0 0 400px;
+}
 
 /*
 div.columns {
