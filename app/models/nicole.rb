@@ -1,0 +1,2 @@
+class Nicole < ApplicationRecord
+end

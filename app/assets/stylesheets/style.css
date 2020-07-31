@@ -71,3 +71,11 @@ div.column {
     min-width: 33%;
 }
 */
+
+details summary {
+    color: transparent;
+}
+details summary span {
+    color:#fff;
+}
+

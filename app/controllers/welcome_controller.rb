@@ -3,6 +3,13 @@ class WelcomeController < ApplicationController
     @rests=Nanao.all
   end
 
+  def comment
+    if params[:name].present?
+      Nicole.create(name: params[:name], comment: params[:comment])
+    end
+    @comments=Nicole.all.order(id: "DESC")
+  end
+  
   def search
     if params[:name].present?  
  
