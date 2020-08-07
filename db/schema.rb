@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_30_140737) do
+ActiveRecord::Schema.define(version: 2020_08_01_130209) do
 
   create_table "nanaos", force: :cascade do |t|
     t.string "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_07_30_140737) do
     t.string "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "ipaddress"
   end
 
   create_table "sample_models", force: :cascade do |t|

@@ -1,98 +1,171 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
-     <link rel="stylesheet" href="style.css">
-     <link rel="stylesheet" href="bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bulma.min.css">
     <title>掲示板</title>
+
 </head>
 
 <body>
-<p>jQuery稼働テスト</p>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $("p").text("jQuery稼働テスト(稼働中)");
-  });
-</script>
+    <script type="text/javascript">
+        $(function () {
+            $('button#addit').click(function () {
+                var add_form = '<div class="control">' +
+                    '<div class="field is-grouped">' +
+                    '<div class="select">' +
+                    '<select name="name[]">' +
+                    '<option value="テイクアウト">テイクアウト</option>' +
+                    '<option value="客のマスク着用">客のマスク着用</option>' +
+                    '<option value="短縮営業">短縮営業</option>' +
+                    '</select>' +
+                    '</div>' +
+                    '<div class="select">' +
+                    '<select name="comment[]">' +
+                    ' <option value="あり">あり</option>' +
+                    ' <option value="なし">なし</option>' +
+                    '</select>' +
+                    '</div>' +
+                    '</div>' +
+                    ' </div>'
+                $("#parent_id").append(add_form);
+            });
 
-<section class="hero is-primary">
-    <div class="hero-body">
-        <div class="container">
-           <h1 class="title">更新</h1>
-        
+
+        });
+    </script>
+
+
+
+
+
+
+
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">更新</h1>
+
+            </div>
         </div>
-    </div>
-</section>
-
-                    
-
-<section class="section ">
-    <div class="container" >
-         <div style="padding: 20px; border: 1px solid #ddd; border-radius: 5px;   width: 30%; margin: auto auto auto 0;"  />
+    </section>
     
-            <details >
-             <summary ><span><strong>＋　更新情報を入力してください</strong></span></summary>
-        
-            <%= form_with url: '/welcome/comment', method: :get, local: true do |f| %>
-                <div style="width: 80%; ">
-                    <br/>
-                     <div class="content">
-                    <div class="control">
-                         <div class="select">
-                            <select name="name">
-                              <option value="takeout">テイクアウト</option>
-                              <option value="mask">客のマスク着用</option>
-                              <option value="time">短縮営業</option>
-                             </select>
-                          </div>
-                         <div class="select">
-                            <select name="comment">
-                              <option value="true">あり</option>
-                              <option value="false">なし</option>
-                             </select>
-                          </div>
-                          <%# <div class="field-body">
-                        <div class="field is-narrow"> %>
-                        <%# <div class="control">  %>
-                             <%# <label class="radio">
-                            <input type="radio" name="member">
-                                        あり
-                            </label>
-                            <label class="radio">
-                            <input type="radio" name="member">
-                                なし
-                        </label> %>
-                        <%# </div> %>
-                        <%# </div> %>
-                        <%# </div> %>
-                    </div>
-                    </div>
-
-                    <div class="content">
-                    <div class="field is-grouped">
-                        <p class="control">
-                             <a class="button is-primary" >
-                                Submit
-                             </a>
-                        </p>
-                        <p class="control">
-                             <a class="button is-light">
-                               Cancel
-                             </a>
-                     </p>
-                    </div>
-                    </div>
-                </div>
-            <% end %>
-            </details>
+    <section>
+    <div class='container has-text-centered'> 
+    <div class="box" >
+        <p>
+          <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+          <br>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+        </p>
+    </div>
+    </div>
+    </section>
+    
+    <section class="section ">
+    <div class="columns">
+        <div class="column" style="background: #fee;">
+            First column
+        </div>
+        <div class="column" style="background: #efe;">
+            Second column
+        </div>
+        <div class="column" style="background: #eef;">
+            Third column
+        </div>
+        <div class="column">
+            Fourth column
         </div>
     </div>
+    </section>
+    <div style="border: 1px solid ;">
+    <div style="padding: 20px; border: 1px solid; border-radius: 5px; width: 100px; margin-left: auto; margin-right:auto; ">
+       <p>aa</p>
+    </div>
+    </div>
+    <section class="section "  style="border: 1px solid;">
+        <div class="container"  style="border: 1px solid;">
+            <div style="padding: 20px; border: 1px solid; border-radius: 5px; width: 300px; margin-left: auto; margin-right:auto; ">
+            <%# <div
+                style="padding: 20px; border: 1px solid #ddd; border-radius: 5px;   width: 30%; margin: auto auto auto 0;" /> %>
 
-</section>  
+            <details open>
+                <summary><span><strong>＋　更新情報を入力してください</strong></span></summary>
 
-    <section class="section">
-      <% @comments.each do |com| %>
-            <h6 class="title is-6"><%= com.name %>: <%= com.comment %></h6>
-        <% end %>    
-    </section>  
+                <form action="/welcome/comment" method="post">
+                    <%#= form_with url: '/welcome/comment', method: :get, local: true do |f| %>
+                    <div style="width: 80%; ">
+                        <br />
+                        <div class="content" id="parent_id">
+                            <div class="control">
+                                <div class="field is-grouped">
+
+                                    <div class="select">
+                                        <select name="name[]">
+                                            <option value="テイクアウト">テイクアウト</option>
+                                            <option value="客のマスク着用">客のマスク着用</option>
+                                            <option value="短縮営業">短縮営業</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="select">
+                                        <select name="comment[]">
+                                            <option value="あり">あり</option>
+                                            <option value="なし">なし</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="content">
+                            <p class="control">
+                                <button id="addit" type="button" class="button is-light">+追加</button>
+                                <%# <a class="button is-light">
+                                     + Add
+                                </a> %>
+                            </p>
+                        </div>
+
+                        <div class="content">
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    <input type="submit" value="Submit" class="button is-primary">
+                                </p>
+                                <p class="control">
+                                    <a class="button is-light">
+                                        Cancel
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <%# end %>
+                </form>
+            </details>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="section"  style="border: 1px solid;">
+        <div class="container"  style="border: 1px solid;">
+
+            <% @comments.each do |com| %>
+            <%# comments=[name: mask　のデータ群を参照, name: takeout　のデータ, name: time　のデータ] %>
+            <div class="content">
+                <div
+                    style="padding: 20px; border: 1px solid #ddd; border-radius: 5px;   width: 30%; margin: auto auto auto 0;" />
+                <% com.each do |co| %>
+                <p><%= co.name %>: <%= co.comment %> (<%= co.ipaddress %>)</p>
+                <% end %>
+            </div>
+            <% end %>
+        </div>
+    </section>
+                                     
 </body>

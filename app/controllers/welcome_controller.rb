@@ -1,13 +1,60 @@
 class WelcomeController < ApplicationController
+  protect_from_forgery :except => [:comment]
   def index
     @rests=Nanao.all
   end
+  def practice
+  end
+  def practice2
+    if params[:name].present?
+      i = 0
+      while i < params[:name].length do
+         Nicole.find_or_initialize_by(ipaddress: request.remote_ip, name: params[:name][i]).update_attributes(name: params[:name][i], comment: params[:comment][i], ipaddress: request.remote_ip)
+         
+        #  Nicole.create(name: params[:name][i], comment: params[:comment][i], ipaddress: request.remote_ip)
+        #  Nicole.create(name: params[:name][i], comment: request.remote_ip)
 
+         i=i+1
+      end
+    end
+
+    # @comments=Nicole.all.order(id: "DESC")
+    
+    # ipを格納
+    # @ips=Nicole.group('ip').select('ip')
+    @ips=Nicole.group('ipaddress')
+    #
+    @comments=Array.new
+    @ips.each do |ip|
+      @comments.push(Nicole.where(ipaddress: ip.ipaddress) )
+    end
+  
+  end
+  
   def comment
     if params[:name].present?
-      Nicole.create(name: params[:name], comment: params[:comment])
+      i = 0
+      while i < params[:name].length do
+         Nicole.find_or_initialize_by(ipaddress: request.remote_ip, name: params[:name][i]).update_attributes(name: params[:name][i], comment: params[:comment][i], ipaddress: request.remote_ip)
+         
+        #  Nicole.create(name: params[:name][i], comment: params[:comment][i], ipaddress: request.remote_ip)
+        #  Nicole.create(name: params[:name][i], comment: request.remote_ip)
+
+         i=i+1
+      end
     end
-    @comments=Nicole.all.order(id: "DESC")
+
+    # @comments=Nicole.all.order(id: "DESC")
+    
+    # ipを格納
+    # @ips=Nicole.group('ip').select('ip')
+    @ips=Nicole.group('ipaddress')
+    #
+    @comments=Array.new
+    @ips.each do |ip|
+      @comments.push(Nicole.where(ipaddress: ip.ipaddress) )
+    end
+  
   end
   
   def search
