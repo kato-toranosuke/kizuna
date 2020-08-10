@@ -23,12 +23,13 @@ class WelcomeController < ApplicationController
     
     # ipを格納
     # @ips=Nicole.group('ip').select('ip')
-    @ips=Nicole.group('ipaddress')
+    # @ips=Nicole.group('ipaddress')
+    @ips=Nicole.select('ipaddress').distinct
     #
-    @comments=Array.new
-    @ips.each do |ip|
-      @comments.push(Nicole.where(ipaddress: ip.ipaddress) )
-    end
+    # @comments=Array.new
+    # @ips.each do |ip|
+    #   @comments.push(Nicole.where(ipaddress: ip.ipaddress) )
+    # end
   
   end
   
@@ -49,7 +50,9 @@ class WelcomeController < ApplicationController
     
     # ipを格納
     # @ips=Nicole.group('ip').select('ip')
-    @ips=Nicole.group('ipaddress').distinct
+    # @ips=Nicole.group('ipaddress').sum('id')
+    @ips=Nicole.select('ipaddress').distinct
+
     # @ips=Nicole.select('DISTINCT ON (ipaddress)')
     #
 
