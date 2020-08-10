@@ -49,7 +49,8 @@ class WelcomeController < ApplicationController
     
     # ipを格納
     # @ips=Nicole.group('ip').select('ip')
-    @ips=Nicole.group('ipaddress')
+    @ips=Nicole.group('ipaddress').distinct
+    # @ips=Nicole.select('DISTINCT ON (ipaddress)')
     #
 
     @comments=Array.new
