@@ -3,6 +3,7 @@ class WelcomeController < ApplicationController
   def index
     @rests=Nanao.all
   end
+
   def practice
   end
   def practice2
@@ -50,10 +51,11 @@ class WelcomeController < ApplicationController
     # @ips=Nicole.group('ip').select('ip')
     @ips=Nicole.group('ipaddress')
     #
-    @comments=Array.new
-    @ips.each do |ip|
-      @comments.push(Nicole.where(ipaddress: ip.ipaddress) )
-    end
+
+    # @comments=Array.new
+    # @ips.each do |ip|
+    #   @comments.push(Nicole.where(ipaddress: ip.ipaddress) )
+    # end
   
   end
   
