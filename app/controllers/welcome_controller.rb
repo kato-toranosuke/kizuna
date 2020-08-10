@@ -52,10 +52,10 @@ class WelcomeController < ApplicationController
     @ips=Nicole.group('ipaddress')
     #
 
-    # @comments=Array.new
-    # @ips.each do |ip|
-    #   @comments.push(Nicole.where(ipaddress: ip.ipaddress) )
-    # end
+    @comments=Array.new
+    @ips.each do |ip|
+      @comments.push(Nicole.where(ipaddress: ip.ipaddress) )
+    end
   
   end
   

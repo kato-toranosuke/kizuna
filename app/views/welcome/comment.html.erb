@@ -115,7 +115,19 @@
                 </div>
 
 
-    
+                <!--div id="end2" class="box has-background-primary">
+                  box
+                </div-->
+                <% @comments.each do |com| %>
+                <%# comments=[name: mask　のデータ群を参照, name: takeout　のデータ, name: time　のデータ] %>
+                <div class="box">
+                    <h6><%= com[0].ipaddress %></h6>
+                    <% com.each do |co| %>
+                    <p><%= co.name %>: <%= co.comment %> </p>
+                    <% end %>
+
+                </div>
+                <% end %>
             </div>
 
             <div id="end" class="box is-inline-block has-background-primary-light  "
@@ -147,7 +159,15 @@
                     box
                 </div>
 
-     
+                <% @comments.each do |com| %>
+                <%# comments=[name: mask　のデータ群を参照, name: takeout　のデータ, name: time　のデータ] %>
+                <div class="box">
+                    <h6><%= com[0].ipaddress %></h6>
+                    <% com.each do |co| %>
+                    <p><%= co.name %>: <%= co.comment %> </p>
+                    <% end %>
+                </div>
+                <% end %>
             </div>
         </div>
     </div>
