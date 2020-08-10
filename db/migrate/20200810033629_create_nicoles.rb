@@ -3,6 +3,7 @@ class CreateNicoles < ActiveRecord::Migration[6.0]
     create_table :nicoles do |t|
       t.string :name
       t.string :comment
+      t.string :ipaddress      
       t.timestamps
     end
   end
