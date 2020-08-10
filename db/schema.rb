@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_130209) do
+ActiveRecord::Schema.define(version: 2020_08_10_035908) do
 
   create_table "nanaos", force: :cascade do |t|
     t.string "name"
@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 2020_08_01_130209) do
   create_table "nicoles", force: :cascade do |t|
     t.string "name"
     t.string "comment"
+    t.string "ipaddress"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "ipaddress"
   end
 
   create_table "sample_models", force: :cascade do |t|
