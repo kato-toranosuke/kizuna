@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>店舗登録</title>
+</head>
+
+<body>
+
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-1 has-text-left">Kizuna</h1>
+                <h1 class="subtitle">~安心安全の外食をお届け~</h1>
+
+                <div class="has-text-right">
+                    <%= form_with url: '/welcome/search', method: :get, local: true do |f| %>
+                    <div style="width: 20%; margin: auto 0 auto auto;">
+                        <%= f.label :name, "店舗名：" %>
+                        <%= f.text_field :name , class: "input" %>
+                    </div>
+                    <br>
+
+                    <%# チェックボックス %>
+                    <%= f.label :takeout, "テイクアウト " %>
+                    <%= f.check_box :takeout, {include_hidden: false}, class: "checkbox" %>
+
+                    <%= f.label :touchless, "　　タッチレス決済 " %>
+                    <%= f.check_box :touchless, {include_hidden: false}, class: "checkbox" %>
+
+                    <%= f.label :mask, "　　マスク必須 " %>
+                    <%= f.check_box :mask, {include_hidden: false}, class: "checkbox" %>
+                    <div class="control">
+                        <%= f.submit :search, class: "button" %>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="box is-inline-block" style=" vertical-align: top; width: 450px; margin: 50px ;">
+    <%= form_tag(url_for(:action => '')) do %>
+    店舗登録
+
+    </div>
+
+
+
+
+</body>
+
+</html>

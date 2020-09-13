@@ -1,0 +1,2 @@
+class UpdateModel < ApplicationRecord
+end

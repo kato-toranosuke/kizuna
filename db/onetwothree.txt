@@ -1,0 +1,50 @@
+マスク
+0:指定なし
+1:推奨
+2:義務
+
+検温
+0:なし
+1:あり
+
+消毒液
+0:なし
+1:あり(推奨)
+2:あり(義務)
+
+テイクアウト
+0:なし
+1:あり(公式HPに記載なし)
+2:あり(公式HPに記載あり)
+
+営業時間
+平日
+土日
+
+月
+火
+水
+木
+金
+土
+日
+
+<span class="icon">
+    <i class="fas fa-head-side-mask"></i>
+</span>
+
+<span class="icon">
+    <i class="fas fa-thermometer-three-quarters"></i>
+</span>
+
+<span class="icon">
+    <i class="fas fa-pump-medical"></i>
+</span>
+
+<span class="icon">
+    <i class="fas fa-shopping-bag"></i>
+</span>
+
+<span class="icon">
+    <i class="far fa-clock"></i>
+</span>

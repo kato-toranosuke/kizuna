@@ -1,0 +1,2 @@
+class RestModel < ApplicationRecord
+end

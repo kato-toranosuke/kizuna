@@ -1,0 +1,26 @@
+console.log("<%= @record_id %>")
+console.log('create')
+
+var good=document.getElementById('good<%= @record_id %>');
+var bad=document.getElementById('bad<%= @record_id %>');
+
+console.log(good.textContent);
+console.log(good.className);
+
+
+var up   =document.getElementById('up<%= @record_id %>');
+var down = document.getElementById('down<%= @record_id %>');
+
+if (up.className=='far fa-thumbs-up'){
+    if (down.className=='fas fa-thumbs-down'){
+        down.className='far fa-thumbs-down';
+        bad.textContent=String(parseInt(bad.className))
+    }
+    up.className='fas fa-thumbs-up';
+    good.textContent=String(parseInt(good.className)+1)
+}
+else if (up.className=='fas fa-thumbs-up'){
+    up.className='far fa-thumbs-up';
+    good.textContent=String(parseInt(good.className))
+
+}

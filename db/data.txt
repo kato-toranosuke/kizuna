@@ -26,7 +26,7 @@ Nicole.create(name: "テイクアウト", comment: "あり", ipaddress:"155.12.7
 Nicole.create(name: "短縮営業", comment: "あり", ipaddress:"12.41.22.54")
 
 
-
+insert into myschema.friends values (1, 'Yamada', 'Tokyo');
 
 
 

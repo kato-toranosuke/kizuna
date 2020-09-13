@@ -1,0 +1,2 @@
+class StackRestModel < ApplicationRecord
+end

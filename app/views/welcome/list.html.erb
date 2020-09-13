@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>店舗一覧</title>
+</head>
+
+<body>
+
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-1 has-text-left">Kizuna</h1>
+                <h1 class="subtitle">~安心安全の外食をお届け~</h1>
+                <h1 class="subtitle">みんなで更新する飲食店の衛生管理情報データベース<br>
+                    - マスク着用義務の有無、消毒液の有無など、コロナ禍で気になる情報をひとまとめ!<br>
+                    - ***から、簡単に情報を投稿できる<br>
+                    - ***から、シンプルなデザインで情報更新の様子が一目でわかる
+                </h1>
+
+                <div class="has-text-right">
+                    <%= form_with url: '/welcome/search', method: :get, local: true do |f| %>
+                    <div style="width: 20%; margin: auto 0 auto auto;">
+                        <%= f.label :name, "店舗名：" %>
+                        <%= f.text_field :name , class: "input" %>
+                    </div>
+                    <br>
+
+                    <%# チェックボックス %>
+                    <%= f.label :takeout, "テイクアウト " %>
+                    <%= f.check_box :takeout, {include_hidden: false}, class: "checkbox" %>
+
+                    <%= f.label :touchless, "　　タッチレス決済 " %>
+                    <%= f.check_box :touchless, {include_hidden: false}, class: "checkbox" %>
+
+                    <%= f.label :mask, "　　マスク必須 " %>
+                    <%= f.check_box :mask, {include_hidden: false}, class: "checkbox" %>
+                    <div class="control">
+                        <%= f.submit :search, class: "button" %>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <% @rests.each do |rest| %>
+    <div class="box is-inline-block" id="<%= rest.id %>" style=" vertical-align: top; width: 450px; margin: 50px ;">
+        <strong style="font-size: 25px;"><%= rest.name%></strong>
+        <br />
+        <br />
+        <h6>
+            <span class="icon">
+                <i class="fas fa-head-side-mask"></i>
+            </span>
+            マスク：<%= rest.mask%>
+        </h6>
+
+        <h6>
+            <span class="icon">
+                <i class="fas fa-thermometer-three-quarters"></i>
+            </span>
+            検温：<%= rest.temp%>
+        </h6>
+
+        <h6>
+            <span class="icon">
+                <i class="fas fa-pump-medical"></i>
+            </span>消毒液：<%= rest.alcohol%>
+        </h6>
+
+        <h6>
+            <span class="icon">
+                <i class="fas fa-shopping-bag"></i>
+            </span>
+            テイクアウト：<%= rest.takeout%>
+        </h6>
+        <br/>
+        <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            月曜日：<%= rest.monday%>
+        </h6>
+        <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            火曜日：<%= rest.tuesday%>
+        </h6>
+                <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            水曜日：<%= rest.wednesday%>
+        </h6>
+                <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            木曜日：<%= rest.thursday%>
+        </h6>
+                <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            金曜日：<%= rest.friday%>
+        </h6>
+          <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            土曜日：<%= rest.saturday%>
+        </h6>
+          <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            日曜日：<%= rest.sunday%>
+        </h6>
+
+
+        <br />
+        <button class="button is-primary is-rounded" onclick="location.href='/welcome/checkdata/<%= rest.id %>'">
+            <span class="icon">
+                <i class="fas fa-code-branch"></i>
+            </span>
+            <span>最新情報</span>
+        </button>
+        <br />
+        <br />
+        <button class="button is-danger is-rounded" onclick="location.href='<%= rest.googlemap%>'">
+            <span class="icon">
+                <i class="fab fa-google"></i>
+            </span>
+            <span>Google Map</span>
+        </button>
+
+        <button class="button is-warning is-rounded"
+            onclick="location.href='<%= rest.tabelog %>' ">
+            <span class="icon">
+                <i class="fas fa-utensils"></i>
+            </span>
+            <span>食べログ</span>
+        </button>
+
+        <button class="button is-success is-rounded" onclick="location.href='<%= rest.homepage %>'">
+            <span class="icon">
+                <i class="fas fa-home"></i>
+            </span>
+            <span>公式HP</span>
+        </button>
+    </div>
+    <% end%>
+    <div class="box is-inline-block" style=" vertical-align: top; width: 450px; margin: 50px ;">
+        <strong style="font-size: 25px;">大戸屋ごはん処 BiViつくば店</strong>
+        <br />
+        <br />
+        <h6>
+            <span class="icon">
+                <i class="fas fa-head-side-mask"></i>
+            </span>
+            マスク：推奨
+        </h6>
+
+        <h6>
+            <span class="icon">
+                <i class="fas fa-thermometer-three-quarters"></i>
+            </span>
+            検温：あり
+        </h6>
+
+        <h6>
+            <span class="icon">
+                <i class="fas fa-pump-medical"></i>
+            </span>消毒液：あり
+        </h6>
+
+        <h6>
+            <span class="icon">
+                <i class="fas fa-shopping-bag"></i>
+            </span>
+            テイクアウト：公式HPに記載
+        </h6>
+        <br />
+        <h6>月：8:30~21:00</h6>
+        <h6>火：8:30~21:00</h6>
+        <h6>水：8:30~21:00</h6>
+        <h6>木：8:30~21:00</h6>
+        <h6>金：8:30~21:00</h6>
+        <h6>土：8:30~21:00</h6>
+        <h6>日：8:30~21:00</h6>
+
+
+        <br />
+        <button class="button is-primary is-rounded" onclick="location.href='/welcome/checkdata/12'">
+            <span class="icon">
+                <i class="fas fa-code-branch"></i>
+            </span>
+            <span>最新情報</span>
+        </button>
+        <br />
+        <br />
+        <button class="button is-danger is-rounded" onclick="location.href='https://g.page/ootoya_2234?share'">
+            <span class="icon">
+                <i class="fab fa-google"></i>
+            </span>
+            <span>Google Map</span>
+        </button>
+
+        <button class="button is-warning is-rounded"
+            onclick="location.href='https://tabelog.com/ibaraki/A0802/A080201/8017905/'">
+            <span class="icon">
+                <i class="fas fa-utensils"></i>
+            </span>
+            <span>食べログ</span>
+        </button>
+
+        <button class="button is-success is-rounded" onclick="location.href='https://www.ootoya.com/'">
+            <span class="icon">
+                <i class="fas fa-home"></i>
+            </span>
+            <span>公式HP</span>
+        </button>
+
+    </div>
+
+
+</body>
+
+</html>

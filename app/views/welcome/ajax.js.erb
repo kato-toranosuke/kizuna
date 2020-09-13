@@ -1,0 +1,14 @@
+console.log('JavaScript開始');
+var up   =document.getElementById('up');
+var down = document.getElementById('down');
+var status = document.getElementById('status');
+
+console.log(up.className)
+console.log(status)
+
+if (up.className=='far fa-thumbs-up'){
+    up.className='fas fa-thumbs-up';
+}
+else if (up.className=='fas fa-thumbs-up'){
+    up.className='far fa-thumbs-up';
+}
