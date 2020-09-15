@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_09_062437) do
+ActiveRecord::Schema.define(version: 2020_09_15_161849) do
 
   create_table "like_models", force: :cascade do |t|
     t.string "ipaddress"
@@ -75,7 +75,22 @@ ActiveRecord::Schema.define(version: 2020_09_09_062437) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "sample_models", force: :cascade do |t|
+  create_table "rest_search_models", force: :cascade do |t|
+    t.string "name"
+    t.string "mask"
+    t.string "temp"
+    t.string "alcohol"
+    t.string "takeout"
+    t.string "monday"
+    t.string "tuesday"
+    t.string "wednesday"
+    t.string "thursday"
+    t.string "friday"
+    t.string "saturday"
+    t.string "sunday"
+    t.string "googlemap"
+    t.string "tabelog"
+    t.string "homepage"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

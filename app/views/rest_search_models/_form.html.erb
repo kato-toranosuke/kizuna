@@ -1,0 +1,92 @@
+<%= form_with(model: rest_search_model, local: true) do |form| %>
+  <% if rest_search_model.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rest_search_model.errors.count, "error") %> prohibited this rest_search_model from being saved:</h2>
+
+      <ul>
+        <% rest_search_model.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mask %>
+    <%= form.text_field :mask %>
+  </div>
+
+  <div class="field">
+    <%= form.label :temp %>
+    <%= form.text_field :temp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :alcohol %>
+    <%= form.text_field :alcohol %>
+  </div>
+
+  <div class="field">
+    <%= form.label :takeout %>
+    <%= form.text_field :takeout %>
+  </div>
+
+  <div class="field">
+    <%= form.label :monday %>
+    <%= form.text_field :monday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tuesday %>
+    <%= form.text_field :tuesday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wednesday %>
+    <%= form.text_field :wednesday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :thursday %>
+    <%= form.text_field :thursday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :friday %>
+    <%= form.text_field :friday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :saturday %>
+    <%= form.text_field :saturday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sunday %>
+    <%= form.text_field :sunday %>
+  </div>
+
+  <div class="field">
+    <%= form.label :googlemap %>
+    <%= form.text_field :googlemap %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tabelog %>
+    <%= form.text_field :tabelog %>
+  </div>
+
+  <div class="field">
+    <%= form.label :homepage %>
+    <%= form.text_field :homepage %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

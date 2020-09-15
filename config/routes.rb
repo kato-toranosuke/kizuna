@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rest_search_models
   root 'welcome#index'
   get 'welcome/index' => 'welcome#index'
   get 'welcome/search' => 'welcome#search'

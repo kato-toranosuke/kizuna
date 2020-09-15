@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<h1>検索フォーム</h1>
+<%= search_form_for @q do |f| %>
+  <%= f.label :name, "店名部分検索" %>
+  <%= f.search_field :name_cont %>
+  <br>
+  <%= f.label :temp, "検温" %>
+　<%= f.radio_button :temp_eq, '', {:checked => true} %>指定なし
+  <%= f.radio_button :temp_eq, 'なし' %>なし
+  <%= f.radio_button :temp_eq, 'あり' %>あり
+  <br>
+  <%= f.submit "検索" %>
+<% end %>
+
+<br>
+
+<h1>検索結果</h1>
+<table>
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :name, "Name") %></th>
+      <th>Mask</th>
+      <th>Temp</th>
+      <th>Alcohol</th>
+      <th>Takeout</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+      <th>Googlemap</th>
+      <th>Tabelog</th>
+      <th>Homepage</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rest_search_models.each do |rest_search_model| %>
+      <tr>
+        <td><%= rest_search_model.name %></td>
+        <td><%= rest_search_model.mask %></td>
+        <td><%= rest_search_model.temp %></td>
+        <td><%= rest_search_model.alcohol %></td>
+        <td><%= rest_search_model.takeout %></td>
+        <td><%= rest_search_model.monday %></td>
+        <td><%= rest_search_model.tuesday %></td>
+        <td><%= rest_search_model.wednesday %></td>
+        <td><%= rest_search_model.thursday %></td>
+        <td><%= rest_search_model.friday %></td>
+        <td><%= rest_search_model.saturday %></td>
+        <td><%= rest_search_model.sunday %></td>
+        <td><%= rest_search_model.googlemap %></td>
+        <td><%= rest_search_model.tabelog %></td>
+        <td><%= rest_search_model.homepage %></td>
+        <td><%= link_to 'Show', rest_search_model %></td>
+        <td><%= link_to 'Edit', edit_rest_search_model_path(rest_search_model) %></td>
+        <td><%= link_to 'Destroy', rest_search_model, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rest Search Model', new_rest_search_model_path %>

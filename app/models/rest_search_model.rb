@@ -1,0 +1,2 @@
+class RestSearchModel < ApplicationRecord
+end
