@@ -1,19 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<h1>検索フォーム</h1>
+<h1>検索フォーム(9/17)</h1>
 <%= search_form_for @q do |f| %>
   <%= f.label :name, "店名部分検索" %>
   <%= f.search_field :name_cont %>
   <br>
-  <%= f.label :temp, "検温" %>
-　<%= f.radio_button :temp_eq, '', {:checked => true} %>指定なし
+
+  <%= f.label :temp, "マスク着用" %>
+  <%= f.radio_button :mask_eq, 'なし' %>なし
+  <%= f.radio_button :mask_eq, '義務' %>義務
+  <%= f.radio_button :mask_eq, '推奨' %>推奨
+  <br>
+
+  <%= f.label :temp, "検温(ラジオボタン)  " %>
   <%= f.radio_button :temp_eq, 'なし' %>なし
   <%= f.radio_button :temp_eq, 'あり' %>あり
+  <br>
+
+    <%= f.label :alcohol, "消毒液(チェックボタン)  " %>
+    <label>
+    あり(推奨)<%= f.check_box :alcohol_eq_any, { multiple: true }, 'あり(推奨)', ' ' %>
+    </label>
+    <label>
+    あり(義務)<%= f.check_box :alcohol_eq_any, { multiple: true }, 'あり(義務)', ' '%>
+    </label>
+  <br>
+
+  <%= f.label :takeout, "テイクアウト(「あり」で部分検索したラジオボタン)  " %>
+  <%= f.radio_button :takeout_eq, 'なし' %>なし
+  <%= f.radio_button :takeout_cont, 'あり' %>あり
+
   <br>
   <%= f.submit "検索" %>
 <% end %>
 
-<br>
+
+
+
 
 <h1>検索結果</h1>
 <table>
