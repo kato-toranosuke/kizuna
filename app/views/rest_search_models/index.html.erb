@@ -1,41 +1,31 @@
 <p id="notice"><%= notice %></p>
 
 <h1>検索フォーム(9/17)</h1>
+
+<div class="has-text-right">
 <%= search_form_for @q do |f| %>
-  <%= f.label :name, "店名部分検索" %>
-  <%= f.search_field :name_cont %>
+  <div style="width: 20%; margin: auto 0 auto auto;">
+    <%= f.label :name, "店名検索：" %>
+    <%= f.search_field :name_cont, class: "input" %>
+  </div>
   <br>
+  <%= f.label :mask, "マスク着用義務  " %>
+  <%= f.check_box :mask_eq, { include_hidden: false, class: "checkbox" }, '義務', ' ' %>　　
 
-  <%= f.label :temp, "マスク着用" %>
-  <%= f.radio_button :mask_eq, 'なし' %>なし
-  <%= f.radio_button :mask_eq, '義務' %>義務
-  <%= f.radio_button :mask_eq, '推奨' %>推奨
+  <%= f.label :temp, "検温  " %>
+  <%= f.check_box :temp_eq, { include_hidden: false, class: "checkbox" }, 'あり', ' ' %>　　
+
+  <%= f.label :alcohol, "消毒液  " %>
+  <%= f.check_box :alcohol_not_eq, { include_hidden: false, class: "checkbox" }, 'なし', ' ' %>　　
+
+  <%= f.label :takeout, "テイクアウト  " %>
+  <%= f.check_box :takeout_not_eq, { include_hidden: false, class: "checkbox" }, 'なし', ' ' %>
   <br>
-
-  <%= f.label :temp, "検温(ラジオボタン)  " %>
-  <%= f.radio_button :temp_eq, 'なし' %>なし
-  <%= f.radio_button :temp_eq, 'あり' %>あり
-  <br>
-
-    <%= f.label :alcohol, "消毒液(チェックボタン)  " %>
-    <label>
-    あり(推奨)<%= f.check_box :alcohol_eq_any, { multiple: true }, 'あり(推奨)', ' ' %>
-    </label>
-    <label>
-    あり(義務)<%= f.check_box :alcohol_eq_any, { multiple: true }, 'あり(義務)', ' '%>
-    </label>
-  <br>
-
-  <%= f.label :takeout, "テイクアウト(「あり」で部分検索したラジオボタン)  " %>
-  <%= f.radio_button :takeout_eq, 'なし' %>なし
-  <%= f.radio_button :takeout_cont, 'あり' %>あり
-
-  <br>
-  <%= f.submit "検索" %>
+  <div class="control">
+    <%= f.submit "検索", class: "button" %>
+  </div>
 <% end %>
-
-
-
+</div>
 
 
 <h1>検索結果</h1>
