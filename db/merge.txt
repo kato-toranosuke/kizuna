@@ -1,0 +1,206 @@
+SampleUpdateModel.all
+select * from SampleUpdateModel
+
+SampleUpdateModel.create(record_id: 1, mask:0, open:0, takeout:0 )
+
+record_idだけ変えて複製
+insert into SampleUpdateModel select max(record_id)+1 as record_id,mask,open,takeout from SampleUpdateModel where max(record_id);
+
+
+コピー
+@record_id=SampleUpdateModel.order(record_id: "DESC").limit(1).select(:record_id)
+@mask=SampleUpdateModel.order(record_id: "DESC").limit(1).select(:mask)
+@open=SampleUpdateModel.order(record_id: "DESC").limit(1).select(:open)
+@takeout=SampleUpdateModel.order(record_id: "DESC").limit(1).select(:takeout)
+
+貼り付け
+SampleUpdateModel.create(record_id: @record_id+1, mask:@mask, open:@open, takeout:@takeout )
+
+更新
+（更新情報：item=["mask","takeout"], comment=["必須", "あり"]）
+for i in  0..item.length-1 do
+    SampleUpdateModel.update_attributes(item[i]:comment[i])
+end
+
+
+
+
+
+
+【UPDATE】  
+SampleUpdateModel.create(record_id: 1, mask:0, open:0, takeout:0, created_at:"2020-02-09 07:47:30", updated_at:"2020-02-09 07:47:30" , rest: 12)
+
+---2020/2/10 ~ 3/14---
+123.456.789.12さんの投稿
+SampleUserModel.create(item: "営業時間", comment:"あり", ipaddress:"123.456.789.12", created_at:"2020-02-11 07:47:30", updated_at:"2020-02-11 07:47:30", status:0 , rest: 12)
+SampleUserModel.create(item: "マスク", comment:"なし", ipaddress:"123.456.789.12", created_at:"2020-02-23 07:47:30", updated_at:"2020-02-23 07:47:30" , status:0, rest: 12 )
+SampleUserModel.create(item: "テイクアウト", comment:"あり", ipaddress:"123.456.789.12", created_at:"2020-03-11 07:47:30", updated_at:"2020-03-11 07:47:30" , status:0 , rest: 12)
+
+1.4.7.12さんの投稿
+SampleUserModel.create(item: "マスク", comment:"なし", ipaddress:"1.4.7.12", created_at:"2020-02-14 07:47:30", updated_at: "2020-02-14 07:47:30", status:1, rest: 12 )
+SampleUserModel.create(item: "テイクアウト", comment:"あり", ipaddress:"1.4.7.12", created_at:"2020-02-23 07:47:30", updated_at:"2020-02-23 07:47:30", status:1, rest: 12  )
+
+43.23.61.12さんの投稿
+SampleUserModel.create(item: "営業時間", comment:"なし", ipaddress:"43.23.61.12", created_at:"2020-02-27 07:47:30", updated_at:"2020-02-27 07:47:30", status:0 , rest: 12)
+SampleUserModel.create(item: "テイクアウト", comment:"あり", ipaddress:"43.23.61.12", created_at:"2020-03-03 07:47:30", updated_at:"2020-03-03 07:47:30", status:0, rest: 12 )
+
+
+【UPDATE】  
+SampleUpdateModel.create(record_id: 2, mask:0, open:0, takeout:1 ,created_at:"2020-03-14 07:47:30", updated_at:"2020-03-14 07:47:30", rest: 12)
+
+
+---2020/3/15 ~ 4/23---
+123.456.789.12さんの投稿
+SampleUserModel.create(item: "マスク", comment:"なし", ipaddress:"123.456.789.12", created_at:"2020-03-18 07:44:38", updated_at:"2020-03-18 07:44:38" , status:1 , rest: 12)
+SampleUserModel.create(item: "テイクアウト", comment:"あり", ipaddress:"123.456.789.12", created_at:"2020-03-25 07:44:38", updated_at:"2020-03-25 07:44:38" , status:1 , rest: 12)
+SampleUserModel.create(item: "営業時間", comment:"あり", ipaddress:"123.456.789.12", created_at:"2020-04-11 09:44:38", updated_at:"2020-04-11 09:44:38" , status:1, rest: 12 )
+
+101.4.7.12さんの投稿
+SampleUserModel.create(item: "マスク", comment:"なし", ipaddress:"101.4.7.12", created_at:"2020-03-15 11:48:32", updated_at:"2020-03-15 11:48:32" , status:0 , rest: 12)
+
+【UPDATE】   
+SampleUpdateModel.create(record_id: 3, mask:0, open:1, takeout:1,created_at:"2020-04-23 07:47:30", updated_at:"2020-04-23 07:47:30" , rest: 12)
+
+---2020/4/24 ~ 6/4---
+123.456.789.12さんの投稿
+SampleUserModel.create(item: "マスク", comment:"あり", ipaddress:"123.456.789.12", created_at:"2020-04-24 11:48:32", updated_at:"2020-04-24 11:48:32" , status:0, rest: 12 )
+SampleUserModel.create(item: "営業時間", comment:"なし", ipaddress:"123.456.789.12", created_at:"2020-06-04 11:48:32", updated_at:"2020-06-04 11:48:32" , status:0, rest: 12 )
+
+143.23.61.12さんの投稿
+SampleUserModel.create(item: "マスク", comment:"なし", ipaddress:"143.23.61.12", created_at:"2020-05-22 11:48:32", updated_at:"2020-05-22 11:48:32", status:1  , rest: 12)
+
+【UPDATE】   
+SampleUpdateModel.create(record_id: 4, mask:1, open:1, takeout:1 ,created_at:"2020-08-20 07:47:30", updated_at:"2020-08-20 07:47:30", rest: 12)
+
+SampleUserModel.create(item: "マスク", comment:"なし", ipaddress:"143.23.61.12", created_at:"2020-08-22 11:48:32", updated_at:"2020-08-22 11:48:32" , status:0, rest: 12 )
+
+
+
+LikeModel.create(ipaddress: "192.11.32.4", record_id: 10, like: 1, , rest: 12)
+LikeModel.create(ipaddress: "102.11.32.4", record_id: 10, like: 0, rest: 12)
+LikeModel.create(ipaddress: "112.11.32.4", record_id: 10, like: 0, rest: 12)
+
+LikeModel.create(ipaddress: "122.15.32.4", record_id: 10, like: 0, rest: 12)
+LikeModel.create(ipaddress: "132.11.23.4", record_id: 10, like: 1, rest: 12)
+LikeModel.create(ipaddress: "142.1.31.4", record_id: 10, like: 0, rest: 12)
+
+
+サイゼつくば
+SampleUpdateModel.create(record_id: 1, rest: 13, mask:1, open:0, takeout:0, created_at:"2020-02-09 07:47:30", updated_at:"2020-02-09 07:47:30" )
+
+SampleUserModel.create(item: "マスク", comment:"なし", ipaddress:"123.456.789.12", rest: 13, created_at:"2020-03-23 17:44:38", updated_at:"2020-03-24 07:44:38" , status:1)
+SampleUserModel.create(item: "テイクアウト", comment:"あり", ipaddress:"123.456.789.12", rest: 13, created_at:"2020-03-23 17:46:38", updated_at:"2020-03-24 07:44:38" , status:1 )
+SampleUserModel.create(item: "営業時間", comment:"あり", ipaddress:"200.456.789.12", rest: 13, created_at:"2020-03-30 17:46:38", updated_at:"2020-03-31 07:44:38" , status:0 )
+
+SampleUpdateModel.create(record_id: 2, rest: 13, mask:0, open:0, takeout:1, created_at:"2020-04-25 07:47:30", updated_at:"2020-04-25 07:47:30" )
+
+SampleUserModel.create(item: "営業時間", comment:"あり", ipaddress:"123.456.789.12", rest: 13, created_at:"2020-04-30 17:44:38", updated_at:"2020-04-30 07:44:38" , status:1)
+
+SampleUpdateModel.create(record_id: 3, rest: 13, mask:0, open:1, takeout:1, created_at:"2020-05-05 07:47:30", updated_at:"2020-05-05 07:47:30" )
+
+SampleUserModel.create(item: "マスク", comment:"なし", ipaddress:"143.23.61.12", created_at:"2020-08-22 11:48:32", updated_at:"2020-08-22 11:48:32" , status:0, rest: 13 )
+
+
+
+t.string "temp"
+    t.string "alcohol"
+    t.string "takeout"
+    t.string "monday"
+    t.string "tuesday"
+    t.string "wednesday"
+    t.string "thursday"
+    t.string "friday"
+    t.string "saturday"
+    t.string "sunday"
+
+UpdateModel.create(record_id: 1, rest: 11, mask: "指定なし", temp: "あり", alcohol:"なし", takeout:"なし", monday:"8:00~12:00,14:00~18:00", tuesday:"8:00~12:00, 14:00~18:00",wednesday:"8:00~12:00, 14:00~18:00",thursday:"8:00~12:00, 14:00~18:00",friday:"8:00~12:00, 14:00~18:00",saturday:"16:00~19:00",sunday:"16:00~19:00" )
+
+
+UpdateModel.create(record_id: 1, rest: 11, mask:"指定なし", temp:"", alcohol:"", takeout:"", monday:"", tuesday:"",wednesday:"",thursday:"",friday:"",saturday:"",sunday:"" )
+
+SampleUserModel.create(status: 0, rest: 2, item: "マスク", comment:"なし", ipaddress:"143.23.61.12")
+
+StackRestModel.create(name: ,mask: , temp: ,alcohol:, takeout:, monday:, tuesday:, wednesday:, thursday:, friday:, saturday:, sunday:, googlemap:, tabelog:, homepage:)
+
+StackRestModel.create(name: ,mask: 指定なし, temp: なし,alcohol: なし, takeout: なし, monday:, tuesday:, wednesday:, thursday:, friday:, saturday:, sunday:, googlemap:, tabelog:, homepage:)
+StackRestModel.create(name: "afa",mask: "指定なし", temp: "なし",alcohol: "なし", takeout: "なし")
+StackRestModel.create(name: "和牛もつ鍋×牛タン 完全個室居酒屋 味斗 つくばエビスタウン店",mask: "指定なし", temp: "なし",alcohol: "なし", takeout: "なし", monday: "11:00~23:00", tuesday:"11:00~23:00", wednesday:"11:00~23:00", thursday:"11:00~23:00", friday:"11:00~23:00", saturday:"11:00~23:00", sunday:"11:00~23:00", googlemap:"https://www.google.co.jp/maps/place/%E3%82%89%E3%81%97%E3%81%8F/@36.0821291,140.1091713,17z/data=!3m1!5s0x60220c62b12b8a65:0x821482169ff287c4!4m5!3m4!1s0x60220c62b4f9aaeb:0xcb9891d722d396ec!8m2!3d36.0821291!4d140.11136", tabelog:" https://tabelog.com/ibaraki/A0802/A080201/8014334/", homepage:" https://ajito.horiifood.co.jp/tukubaebisutown/")
+StackRestModel.create(name: "和牛もつ鍋×牛タン 完全個室居酒屋 味斗 つくばエビスタウン店" ,mask: "指定なし", temp: "なし",alcohol: "なし", takeout: "なし")
+ StackRestModel.create(name: "和牛もつ鍋×牛タン 完全個室居酒屋 味斗 つくばエビスタウン店" )   t.string "name"
+    t.string "mask"StackRestModel.create(name: "和牛もつ鍋牛タン")
+    t.string "temp"
+    t.string "alcohol"
+    t.string "takeout"
+    t.string "monday"
+    t.string "tuesday"
+    t.string "wednesday"
+    t.string "thursday"
+    t.string "friday"
+    t.string "saturday"
+    t.string "sunday"
+    t.string "googlemap"
+    t.string "tabelog"
+    t.string "homepage"
+StackRestModel.create(name: "和牛もつ鍋x牛タン 完全個室居酒屋 味斗 つくばエビスタウン店",mask: "指定なし", temp: "なし",alcohol: "なし", takeout: "なし", monday: "11:00~23:00", tuesday:"11:00~23:00", wednesday:"11:00~23:00", thursday:"11:00~23:00", friday:"11:00~23:00", saturday:"11:00~23:00", sunday:"11:00~23:00", googlemap:"https://www.google.co.jp/maps/place/%E3%82%89%E3%81%97%E3%81%8F/@36.0821291,140.1091713,17z/data=!3m1!5s0x60220c62b12b8a65:0x821482169ff287c4!4m5!3m4!1s0x60220c62b4f9aaeb:0xcb9891d722d396ec!8m2!3d36.0821291!4d140.11136", tabelog:" https://tabelog.com/ibaraki/A0802/A080201/8014334/", homepage:" https://ajito.horiifood.co.jp/tukubaebisutown/")
+
+
+
+    <table>
+  <%# <thead>
+    <tr>
+      <th><%= sort_link(@q, :name, "Name") %></th>
+      <th>Mask</th>
+      <th>Temp</th>
+      <th>Alcohol</th>
+      <th>Takeout</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+      <th>Googlemap</th>
+      <th>Tabelog</th>
+      <th>Homepage</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead> %>
+
+  <tbody>
+    <% @rests.each do |rest_model| %>
+      <tr>
+        <td><%= rest_model.name %></td>
+        <td><%= rest_model.mask %></td>
+        <td><%= rest_model.temp %></td>
+        <td><%= rest_model.alcohol %></td>
+        <td><%= rest_model.takeout %></td>
+        <td><%= rest_model.monday %></td>
+        <td><%= rest_model.tuesday %></td>
+        <td><%= rest_model.wednesday %></td>
+        <td><%= rest_model.thursday %></td>
+        <td><%= rest_model.friday %></td>
+        <td><%= rest_model.saturday %></td>
+        <td><%= rest_model.sunday %></td>
+        <td><%= rest_model.googlemap %></td>
+        <td><%= rest_model.tabelog %></td>
+        <td><%= rest_model.homepage %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!--%= form_tag('/welcome/list', method: :get) do |f| %-->
+<!--%= search_form_for @q do |f| %-->
+<!--%= form_with url: '/welcome/list', method: :get, local: true do |f| %>
+  <%= f.label :name, "店名部分検索" %>
+  <%= f.search_field :name_cont %>
+
+  <%= f.label :temp, "検温" %>
+　<%= f.radio_button :temp_eq, '', {:checked => true} %>指定なし
+  <%= f.radio_button :temp_eq, 'なし' %>なし
+  <%= f.radio_button :temp_eq, 'あり' %>あり
+
+  <%= f.submit "検索" %>
+<% end % -->
+

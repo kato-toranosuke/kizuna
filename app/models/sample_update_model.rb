@@ -1,0 +1,2 @@
+class SampleUpdateModel < ApplicationRecord
+end

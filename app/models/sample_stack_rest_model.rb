@@ -1,0 +1,2 @@
+class SampleStackRestModel < ApplicationRecord
+end

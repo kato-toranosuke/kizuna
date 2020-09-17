@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>店舗一覧</title>
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-1 has-text-left">Kizuna</h1>
+                <h1 class="subtitle">~安心安全の外食をお届け~</h1>
+                <h6>みんなで更新する飲食店の衛生管理情報データベース<br>
+                    - マスク着用義務の有無、消毒液の有無など、コロナ禍で気になる情報をひとまとめ!<br>
+                    - ***から、簡単に情報を投稿できる<br>
+                    - ***から、シンプルなデザインで情報更新の様子が一目でわかる
+                </h6>
+
+            <div class="has-text-right">
+                <%= search_form_for(@q, url: '/list', method: :get) do |f| %>
+                    <div style="width: 20%; margin: auto 0 auto auto;">
+                        <%= f.label :name, "店名検索：" %>
+                        <%= f.search_field :name_cont, class: "input" %>
+                    </div>
+                    <br>
+                    <%= f.label :mask, "マスク着用義務  " %>
+                    <%= f.check_box :mask_eq, { include_hidden: false, class: "checkbox" }, '義務', ' ' %>　
+
+                    <%= f.label :temp, "検温  " %>
+                    <%= f.check_box :temp_eq, { include_hidden: false, class: "checkbox" }, 'あり', ' ' %>　
+
+                    <%= f.label :alcohol, "消毒液  " %>
+                    <%= f.check_box :alcohol_not_eq, { include_hidden: false, class: "checkbox" }, 'なし', ' ' %>　
+
+                    <%= f.label :takeout, "テイクアウト  " %>
+                    <%= f.check_box :takeout_not_eq, { include_hidden: false, class: "checkbox" }, 'なし', ' ' %>
+                    <br>
+                    <div class="control">
+                        <%= f.submit "検索", class: "button" %>
+                    </div>
+                <% end %>
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+    <% @rests.each do |rest| %>
+    <div class="box is-inline-block" id="<%= rest.id %>" style=" vertical-align: top; width: 450px; margin: 12px ;">
+        <strong style="font-size: 25px;"><%= rest.name%></strong>
+        <br /><br />
+        <h6>
+            <span class="icon">
+                <i class="fas fa-head-side-mask"></i>
+            </span>
+            マスク：<%= rest.mask%>
+        </h6>
+        <h6>
+            <span class="icon">
+                <i class="fas fa-thermometer-three-quarters"></i>
+            </span>
+            検温：<%= rest.temp%>
+        </h6>
+        <h6>
+            <span class="icon">
+                <i class="fas fa-pump-medical"></i>
+            </span>消毒液：<%= rest.alcohol%>
+        </h6>
+        <h6>
+            <span class="icon">
+                <i class="fas fa-shopping-bag"></i>
+            </span>
+            テイクアウト：<%= rest.takeout%>
+        </h6>
+        <br/>
+        <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            月曜日：<%= rest.monday%>
+        </h6>
+        <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            火曜日：<%= rest.tuesday%>
+        </h6>
+        <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            水曜日：<%= rest.wednesday%>
+        </h6>
+        <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            木曜日：<%= rest.thursday%>
+        </h6>
+        <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            金曜日：<%= rest.friday%>
+        </h6>
+        <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            土曜日：<%= rest.saturday%>
+        </h6>
+        <h6>
+            <span class="icon">
+                <i class="far fa-clock"></i>
+            </span>
+            日曜日：<%= rest.sunday%>
+        </h6>
+        <br />
+        <button class="button is-primary is-rounded" onclick="location.href='/checkdata/<%= rest.id %>'">
+            <span class="icon">
+                <i class="fas fa-code-branch"></i>
+            </span>
+            <span>最新情報</span>
+        </button>
+        <br /><br />
+        <button class="button is-danger is-rounded" onclick="location.href='<%= rest.googlemap%>'">
+            <span class="icon">
+                <i class="fab fa-google"></i>
+            </span>
+            <span>Google Map</span>
+        </button>
+        <button class="button is-warning is-rounded"
+            onclick="location.href='<%= rest.tabelog %>' ">
+            <span class="icon">
+                <i class="fas fa-utensils"></i>
+            </span>
+            <span>食べログ</span>
+        </button>
+        <button class="button is-success is-rounded" onclick="location.href='<%= rest.homepage %>'">
+            <span class="icon">
+                <i class="fas fa-home"></i>
+            </span>
+            <span>公式HP</span>
+        </button>
+    </div>
+    <% end%>
+
+</body>
+</html>

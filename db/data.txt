@@ -17,8 +17,16 @@ HARE GOHAN(ok)
 〒305-0817 茨城県つくば市研究学園５−１９ イーアスつくば 1F
 
 
+Nicole.create(name: "テイクアウト", comment: "あり", ipaddress:"192.11.32.4")
+Nicole.create(name: "短縮営業", comment: "あり", ipaddress:"192.11.32.4")
+
+Nicole.create(name: "タッチレス", comment: "なし", ipaddress:"155.12.75.32")
+Nicole.create(name: "テイクアウト", comment: "あり", ipaddress:"155.12.75.32")
+
+Nicole.create(name: "短縮営業", comment: "あり", ipaddress:"12.41.22.54")
 
 
+insert into myschema.friends values (1, 'Yamada', 'Tokyo');
 
 
 

@@ -1,0 +1,8 @@
+create table nicole (id char(4) not null, name text not null, comment text not null, primary key(id));
+INSERT INTO nicole (id,name,comment) VALUES (1,'hoge','テイクアウト');
+INSERT INTO nicole (id,name,comment) VALUES (2,'192.15','テイクアウト');
+INSERT INTO nicole (id,name,comment) VALUES (3,'192.15','マスク');
+
+INSERT INTO nicole (id,name,comment) VALUES (4,'12.15','ト');
+INSERT INTO nicole (id,name,comment) VALUES (5,'12.15','マ');
+

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_30_140737) do
+ActiveRecord::Schema.define(version: 2020_09_09_062437) do
+
+  create_table "like_models", force: :cascade do |t|
+    t.string "ipaddress"
+    t.integer "record_id"
+    t.integer "like"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "rest"
+  end
 
   create_table "nanaos", force: :cascade do |t|
     t.string "name"
@@ -41,11 +50,123 @@ ActiveRecord::Schema.define(version: 2020_07_30_140737) do
   create_table "nicoles", force: :cascade do |t|
     t.string "name"
     t.string "comment"
+    t.string "ipaddress"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rest_models", force: :cascade do |t|
+    t.string "name"
+    t.string "mask"
+    t.string "temp"
+    t.string "alcohol"
+    t.string "takeout"
+    t.string "monday"
+    t.string "tuesday"
+    t.string "wednesday"
+    t.string "thursday"
+    t.string "friday"
+    t.string "saturday"
+    t.string "sunday"
+    t.string "googlemap"
+    t.string "tabelog"
+    t.string "homepage"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sample_models", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sample_rest_models", force: :cascade do |t|
+    t.string "name"
+    t.integer "mask"
+    t.integer "temp"
+    t.integer "alcohol"
+    t.integer "takeout"
+    t.integer "time"
+    t.string "googlemap"
+    t.string "tabelog"
+    t.string "homepage"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sample_stack_rest_models", force: :cascade do |t|
+    t.string "name"
+    t.integer "mask"
+    t.integer "temp"
+    t.integer "alcohol"
+    t.integer "takeout"
+    t.integer "time"
+    t.string "googlemap"
+    t.string "tabelog"
+    t.string "homepage"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sample_update_models", force: :cascade do |t|
+    t.integer "record_id"
+    t.integer "mask"
+    t.integer "open"
+    t.integer "takeout"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "rest"
+  end
+
+  create_table "sample_user_models", force: :cascade do |t|
+    t.string "item"
+    t.string "comment"
+    t.string "ipaddress"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "status"
+    t.integer "rest"
+  end
+
+  create_table "stack_rest_models", force: :cascade do |t|
+    t.string "name"
+    t.string "mask"
+    t.string "temp"
+    t.string "alcohol"
+    t.string "takeout"
+    t.string "monday"
+    t.string "tuesday"
+    t.string "wednesday"
+    t.string "thursday"
+    t.string "friday"
+    t.string "saturday"
+    t.string "sunday"
+    t.string "googlemap"
+    t.string "tabelog"
+    t.string "homepage"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "update_models", force: :cascade do |t|
+    t.integer "record_id"
+    t.integer "rest"
+    t.string "mask"
+    t.string "temp"
+    t.string "alcohol"
+    t.string "takeout"
+    t.string "monday"
+    t.string "tuesday"
+    t.string "wednesday"
+    t.string "thursday"
+    t.string "friday"
+    t.string "saturday"
+    t.string "sunday"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_models", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
