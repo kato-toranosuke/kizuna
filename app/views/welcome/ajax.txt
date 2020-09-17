@@ -1,7 +1,0 @@
-LikeModel.create(ipaddress: "192.11.32.4", record_id: 10, like: 1)
-LikeModel.create(ipaddress: "102.11.32.4", record_id: 10, like: 0)
-LikeModel.create(ipaddress: "112.11.32.4", record_id: 10, like: 0)
-
-LikeModel.create(ipaddress: "122.15.32.4", record_id: 10, like: 0)
-LikeModel.create(ipaddress: "132.11.23.4", record_id: 10, like: 1)
-LikeModel.create(ipaddress: "142.1.31.4", record_id: 10, like: 0)

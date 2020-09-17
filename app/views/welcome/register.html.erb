@@ -20,28 +20,31 @@
                 <h1 class="title is-1 has-text-left">Kizuna</h1>
                 <h1 class="subtitle">~安心安全の外食をお届け~</h1>
 
-                <div class="has-text-right">
-                    <%= form_with url: '/welcome/search', method: :get, local: true do |f| %>
+            <div class="has-text-right">
+                <%= search_form_for(@q, url: '/welcome/register', method: :get) do |f| %>
                     <div style="width: 20%; margin: auto 0 auto auto;">
-                        <%= f.label :name, "店舗名：" %>
-                        <%= f.text_field :name , class: "input" %>
+                        <%= f.label :name, "店名検索：" %>
+                        <%= f.search_field :name_cont, class: "input" %>
                     </div>
                     <br>
+                    <%= f.label :mask, "マスク着用義務  " %>
+                    <%= f.check_box :mask_eq, { include_hidden: false, class: "checkbox" }, '義務', ' ' %>　
 
-                    <%# チェックボックス %>
-                    <%= f.label :takeout, "テイクアウト " %>
-                    <%= f.check_box :takeout, {include_hidden: false}, class: "checkbox" %>
+                    <%= f.label :temp, "検温  " %>
+                    <%= f.check_box :temp_eq, { include_hidden: false, class: "checkbox" }, 'あり', ' ' %>　
 
-                    <%= f.label :touchless, "　　タッチレス決済 " %>
-                    <%= f.check_box :touchless, {include_hidden: false}, class: "checkbox" %>
+                    <%= f.label :alcohol, "消毒液  " %>
+                    <%= f.check_box :alcohol_not_eq, { include_hidden: false, class: "checkbox" }, 'なし', ' ' %>　
 
-                    <%= f.label :mask, "　　マスク必須 " %>
-                    <%= f.check_box :mask, {include_hidden: false}, class: "checkbox" %>
+                    <%= f.label :takeout, "テイクアウト  " %>
+                    <%= f.check_box :takeout_not_eq, { include_hidden: false, class: "checkbox" }, 'なし', ' ' %>
+                    <br>
                     <div class="control">
-                        <%= f.submit :search, class: "button" %>
+                        <%= f.submit "検索", class: "button" %>
                     </div>
-                    <% end %>
-                </div>
+                <% end %>
+            </div>
+
             </div>
         </div>
     </section>
@@ -381,37 +384,37 @@
                         <span class="icon">
                             <i class="far fa-clock"></i>
                         </span>
-                        火曜日：<%= st.monday%>
+                        火曜日：<%= st.tuesday%>
                     </h6>
                                         <h6>
                         <span class="icon">
                             <i class="far fa-clock"></i>
                         </span>
-                        水曜日：<%= st.monday%>
+                        水曜日：<%= st.wednesday%>
                     </h6>
                                         <h6>
                         <span class="icon">
                             <i class="far fa-clock"></i>
                         </span>
-                        木曜日：<%= st.monday%>
+                        木曜日：<%= st.thursday%>
                     </h6>
                                         <h6>
                         <span class="icon">
                             <i class="far fa-clock"></i>
                         </span>
-                        金曜日：<%= st.monday%>
+                        金曜日：<%= st.friday%>
                     </h6>
                                         <h6>
                         <span class="icon">
                             <i class="far fa-clock"></i>
                         </span>
-                        土曜日：<%= st.monday%>
+                        土曜日：<%= st.saturday%>
                     </h6>
                                            <h6>
                         <span class="icon">
                             <i class="far fa-clock"></i>
                         </span>
-                        日曜日：<%= st.monday%>
+                        日曜日：<%= st.sunday%>
                     </h6>
                     <span class="icon">
                         <i class="fab fa-google"></i>

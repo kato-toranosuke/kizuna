@@ -7,69 +7,113 @@
 </head>
 
 <body>
-
     <section class="hero is-primary">
         <div class="hero-body">
             <div class="container">
                 <h1 class="title is-1 has-text-left">Kizuna</h1>
                 <h1 class="subtitle">~安心安全の外食をお届け~</h1>
-                <h1 class="subtitle">みんなで更新する飲食店の衛生管理情報データベース<br>
+                <h6>みんなで更新する飲食店の衛生管理情報データベース<br>
                     - マスク着用義務の有無、消毒液の有無など、コロナ禍で気になる情報をひとまとめ!<br>
                     - ***から、簡単に情報を投稿できる<br>
                     - ***から、シンプルなデザインで情報更新の様子が一目でわかる
-                </h1>
+                </h6>
 
-                <div class="has-text-right">
-                    <%= form_with url: '/welcome/search', method: :get, local: true do |f| %>
+            <div class="has-text-right">
+                <%= search_form_for(@q, url: '/welcome/list', method: :get) do |f| %>
                     <div style="width: 20%; margin: auto 0 auto auto;">
-                        <%= f.label :name, "店舗名：" %>
-                        <%= f.text_field :name , class: "input" %>
+                        <%= f.label :name, "店名検索：" %>
+                        <%= f.search_field :name_cont, class: "input" %>
                     </div>
                     <br>
+                    <%= f.label :mask, "マスク着用義務  " %>
+                    <%= f.check_box :mask_eq, { include_hidden: false, class: "checkbox" }, '義務', ' ' %>　
 
-                    <%# チェックボックス %>
-                    <%= f.label :takeout, "テイクアウト " %>
-                    <%= f.check_box :takeout, {include_hidden: false}, class: "checkbox" %>
+                    <%= f.label :temp, "検温  " %>
+                    <%= f.check_box :temp_eq, { include_hidden: false, class: "checkbox" }, 'あり', ' ' %>　
 
-                    <%= f.label :touchless, "　　タッチレス決済 " %>
-                    <%= f.check_box :touchless, {include_hidden: false}, class: "checkbox" %>
+                    <%= f.label :alcohol, "消毒液  " %>
+                    <%= f.check_box :alcohol_not_eq, { include_hidden: false, class: "checkbox" }, 'なし', ' ' %>　
 
-                    <%= f.label :mask, "　　マスク必須 " %>
-                    <%= f.check_box :mask, {include_hidden: false}, class: "checkbox" %>
+                    <%= f.label :takeout, "テイクアウト  " %>
+                    <%= f.check_box :takeout_not_eq, { include_hidden: false, class: "checkbox" }, 'なし', ' ' %>
+                    <br>
                     <div class="control">
-                        <%= f.submit :search, class: "button" %>
+                        <%= f.submit "検索", class: "button" %>
                     </div>
-                    <% end %>
-                </div>
+                <% end %>
+            </div>
+
             </div>
         </div>
     </section>
 
+
+<!--table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Mask</th>
+      <th>Temp</th>
+      <th>Alcohol</th>
+      <th>Takeout</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+      <th>Googlemap</th>
+      <th>Tabelog</th>
+      <th>Homepage</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rests.each do |rest_model| %>
+      <tr>
+        <td><%= rest_model.name %></td>
+        <td><%= rest_model.mask %></td>
+        <td><%= rest_model.temp %></td>
+        <td><%= rest_model.alcohol %></td>
+        <td><%= rest_model.takeout %></td>
+        <td><%= rest_model.monday %></td>
+        <td><%= rest_model.tuesday %></td>
+        <td><%= rest_model.wednesday %></td>
+        <td><%= rest_model.thursday %></td>
+        <td><%= rest_model.friday %></td>
+        <td><%= rest_model.saturday %></td>
+        <td><%= rest_model.sunday %></td>
+        <td><%= rest_model.googlemap %></td>
+        <td><%= rest_model.tabelog %></td>
+        <td><%= rest_model.homepage %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table-->
+
     <% @rests.each do |rest| %>
-    <div class="box is-inline-block" id="<%= rest.id %>" style=" vertical-align: top; width: 450px; margin: 50px ;">
+    <div class="box is-inline-block" id="<%= rest.id %>" style=" vertical-align: top; width: 450px; margin: 12px ;">
         <strong style="font-size: 25px;"><%= rest.name%></strong>
-        <br />
-        <br />
+        <br /><br />
         <h6>
             <span class="icon">
                 <i class="fas fa-head-side-mask"></i>
             </span>
             マスク：<%= rest.mask%>
         </h6>
-
         <h6>
             <span class="icon">
                 <i class="fas fa-thermometer-three-quarters"></i>
             </span>
             検温：<%= rest.temp%>
         </h6>
-
         <h6>
             <span class="icon">
                 <i class="fas fa-pump-medical"></i>
             </span>消毒液：<%= rest.alcohol%>
         </h6>
-
         <h6>
             <span class="icon">
                 <i class="fas fa-shopping-bag"></i>
@@ -89,38 +133,36 @@
             </span>
             火曜日：<%= rest.tuesday%>
         </h6>
-                <h6>
+        <h6>
             <span class="icon">
                 <i class="far fa-clock"></i>
             </span>
             水曜日：<%= rest.wednesday%>
         </h6>
-                <h6>
+        <h6>
             <span class="icon">
                 <i class="far fa-clock"></i>
             </span>
             木曜日：<%= rest.thursday%>
         </h6>
-                <h6>
+        <h6>
             <span class="icon">
                 <i class="far fa-clock"></i>
             </span>
             金曜日：<%= rest.friday%>
         </h6>
-          <h6>
+        <h6>
             <span class="icon">
                 <i class="far fa-clock"></i>
             </span>
             土曜日：<%= rest.saturday%>
         </h6>
-          <h6>
+        <h6>
             <span class="icon">
                 <i class="far fa-clock"></i>
             </span>
             日曜日：<%= rest.sunday%>
         </h6>
-
-
         <br />
         <button class="button is-primary is-rounded" onclick="location.href='/welcome/checkdata/<%= rest.id %>'">
             <span class="icon">
@@ -128,15 +170,13 @@
             </span>
             <span>最新情報</span>
         </button>
-        <br />
-        <br />
+        <br /><br />
         <button class="button is-danger is-rounded" onclick="location.href='<%= rest.googlemap%>'">
             <span class="icon">
                 <i class="fab fa-google"></i>
             </span>
             <span>Google Map</span>
         </button>
-
         <button class="button is-warning is-rounded"
             onclick="location.href='<%= rest.tabelog %>' ">
             <span class="icon">
@@ -144,7 +184,6 @@
             </span>
             <span>食べログ</span>
         </button>
-
         <button class="button is-success is-rounded" onclick="location.href='<%= rest.homepage %>'">
             <span class="icon">
                 <i class="fas fa-home"></i>
@@ -153,7 +192,8 @@
         </button>
     </div>
     <% end%>
-    <div class="box is-inline-block" style=" vertical-align: top; width: 450px; margin: 50px ;">
+
+    <!--div class="box is-inline-block" style=" vertical-align: top; width: 450px; margin: 50px ;">
         <strong style="font-size: 25px;">大戸屋ごはん処 BiViつくば店</strong>
         <br />
         <br />
@@ -192,7 +232,6 @@
         <h6>土：8:30~21:00</h6>
         <h6>日：8:30~21:00</h6>
 
-
         <br />
         <button class="button is-primary is-rounded" onclick="location.href='/welcome/checkdata/12'">
             <span class="icon">
@@ -208,7 +247,6 @@
             </span>
             <span>Google Map</span>
         </button>
-
         <button class="button is-warning is-rounded"
             onclick="location.href='https://tabelog.com/ibaraki/A0802/A080201/8017905/'">
             <span class="icon">
@@ -216,17 +254,13 @@
             </span>
             <span>食べログ</span>
         </button>
-
         <button class="button is-success is-rounded" onclick="location.href='https://www.ootoya.com/'">
             <span class="icon">
                 <i class="fas fa-home"></i>
             </span>
             <span>公式HP</span>
         </button>
-
-    </div>
-
+    </div-->
 
 </body>
-
 </html>

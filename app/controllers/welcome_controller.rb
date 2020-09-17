@@ -1,8 +1,5 @@
 class WelcomeController < ApplicationController
   protect_from_forgery :except => [:checkdata]
-  def index
-    @rests=Nanao.all
-  end
 
   def update_ok
     # @update_item=params[:item][0]
@@ -62,6 +59,7 @@ class WelcomeController < ApplicationController
 
     end
   end
+
   def update_ng
   end
 
@@ -69,7 +67,6 @@ class WelcomeController < ApplicationController
     @restid=params[:restid]
     gon.record_id="aaa"
     #入力
-
     if params[:item].present?
       i = 0
       j = 0
@@ -133,7 +130,6 @@ class WelcomeController < ApplicationController
         end
          #  Nicole.create(name: params[:name][i], comment: params[:comment][i], ipaddress: request.remote_ip)
         #  Nicole.create(name: params[:name][i], comment: request.remote_ip)
-
          i=i+1
       end
     end
@@ -167,8 +163,11 @@ class WelcomeController < ApplicationController
     end
 
   end
+
   def list
-    @rests=RestModel.all
+    # @rests=RestModel.all
+    @q = RestModel.ransack(params[:q])
+    @rests = @q.result(distinct: true)
   end
 
   def ok
@@ -205,7 +204,9 @@ class WelcomeController < ApplicationController
       StackRestModel.create(name: params[:name], mask: params[:mask], temp: params[:temp], alcohol: params[:alcohol], takeout: params[:takeout], monday: params[:monday], tuesday: params[:tuesday], wednesday: params[:wednesday], thursday: params[:thursday], friday: params[:friday], saturday: params[:saturday], sunday: params[:sunday] , googlemap: params[:googlemap], tabelog: params[:tabelog], homepage: params[:homepage])
     end
 
-    @stack=StackRestModel.all
+    #@stack=StackRestModel.all
+    @q = StackRestModel.ransack(params[:q])
+    @stack = @q.result(distinct: true)
   end
 
 
@@ -226,19 +227,6 @@ class WelcomeController < ApplicationController
     # LikeModel.create(ipaddress: request.remote_ip, record_id: 10, like: 0)
   end
   # SampleUserModel.find_or_initialize_by(ipaddress: request.remote_ip, item: params[:item][i]).update_attributes(item: params[:item][i], comment: params[:comment][i], ipaddress: request.remote_ip)
-
-  
-  def ajax
-
-    @hey="hey"
-
-    @good=LikeModel.where(like: 1).count
-    @bad=LikeModel.where(like: 0).count
-    # respond_to do |format|
-    #   format.html {}
-    #   format.json { render json: {"key": "yes we can" } }
-    # end
-  end
   
   def checkdata
     @restid=params[:restid]
@@ -346,214 +334,6 @@ class WelcomeController < ApplicationController
       @all_comments.push(@comments)
     end
 
-
-
-    # for i in 1..@update_num-1 do
-    #   @uptime=SampleUpdateModel.find_by(record_id: i)
-    #   @uptime2=SampleUpdateModel.find_by(record_id: i+1)
-    #   # @user_data=SampleUserModel.where("? < updated_at and updated_at < ?", "2020-02-12 07:47:30","2020-05-20 07:47:30")
-    #   @user_data[i-1]=SampleUserModel.where("? < updated_at and updated_at < ?", @uptime.created_at,@uptime2.created_at)
-    #   @update_data[i-1]=@uptime
-
-    #   @ips=@user_data[i-1].select('ipaddress').distinct
-    #   @comments=Array.new
-    #   @ips.each do |ip|
-    #     @comments.push(@user_data[i-1].where(ipaddress: ip.ipaddress) )
-    #   end
-    #   @all_comments.push(@comments)
-    # end 
-    # @update_data[@update_num-1]=SampleUpdateModel.find_by(record_id: @update_num)
-
-
-    # select * from user_table where  (record_id=1のcreated_at) < updated_at < (record_id=2のcreated_at)
-    # # コピー
-    # @copy=SampleUpdateModel.order(record_id: "DESC").limit(1)
-    # @record_id=SampleUpdateModel.order(record_id: "DESC").limit(1).select(:record_id)
-    # @mask=SampleUpdateModel.order(record_id: "DESC").limit(1).select(:mask)
-    # @open=SampleUpdateModel.order(record_id: "DESC").limit(1).select(:open)
-    # @takeout=SampleUpdateModel.order(record_id: "DESC").limit(1).select(:takeout) 
-
-    # # 貼り付け
-    # SampleUpdateModel.create(record_id: @copy[0].record_id+1, mask:@copy[0].mask, open:@copy[0].open, takeout:@copy[0].takeout )
-
-    # # 更新
-    # # （更新情報：item=["mask","takeout"], comment=["必須", "あり"]）
-    # @item=["mask","takeout"]
-    # @comment=[0,0]
-    # for i in 0..@item.length-1 do
-    #   SampleUpdateModel.where(record_id: @copy[0].record_id+1).update_all("#{@item[i]}": @comment[i])
-    #   # SampleUpdateModel.where(record_id: @copy[0].record_id+1).update_all(mask: 1)
-    # end
-
-
-  end
-
-  def practice
-  end
-  def practice2
-    if params[:name].present?
-      i = 0
-      while i < params[:name].length do
-         Nicole.find_or_initialize_by(ipaddress: request.remote_ip, name: params[:name][i]).update_attributes(name: params[:name][i], comment: params[:comment][i], ipaddress: request.remote_ip)
-         
-        #  Nicole.create(name: params[:name][i], comment: params[:comment][i], ipaddress: request.remote_ip)
-        #  Nicole.create(name: params[:name][i], comment: request.remote_ip)
-
-         i=i+1
-      end
-    end
-
-    # @comments=Nicole.all.order(id: "DESC")
-    
-    # ipを格納
-    # @ips=Nicole.group('ip').select('ip')
-    # @ips=Nicole.group('ipaddress')
-    @ips=Nicole.select('ipaddress').distinct
-    #
-    # @comments=Array.new
-    # @ips.each do |ip|
-    #   @comments.push(Nicole.where(ipaddress: ip.ipaddress) )
-    # end
-  
-  end
-  
-  def comment
-    if params[:name].present?
-      i = 0
-      while i < params[:name].length do
-         Nicole.find_or_initialize_by(ipaddress: request.remote_ip, name: params[:name][i]).update_attributes(name: params[:name][i], comment: params[:comment][i], ipaddress: request.remote_ip)
-         
-        #  Nicole.create(name: params[:name][i], comment: params[:comment][i], ipaddress: request.remote_ip)
-        #  Nicole.create(name: params[:name][i], comment: request.remote_ip)
-
-         i=i+1
-      end
-    end
-
-    # @comments=Nicole.all.order(id: "DESC")
-    
-    # ipを格納
-    # @ips=Nicole.group('ip').select('ip')
-    # @ips=Nicole.group('ipaddress').sum('id')
-    @ips=Nicole.select('ipaddress').distinct
-
-    # @ips=Nicole.select('DISTINCT ON (ipaddress)')
-    #
-
-    @comments=Array.new
-    @ips.each do |ip|
-      @comments.push(Nicole.where(ipaddress: ip.ipaddress) )
-    end
-  
-  end
-  
-  def search
-    if params[:name].present?  
- 
-      if params[:touchless].present? 
-  
-          if params[:mask].present?
-  
-              if params[:takeout].present?  #name,touchless,mask,takeout
-               @rests = Nanao.where('name LIKE ?', "%#{params[:name]}%").where(touchless: true).where(mask: true).where(takeout: true)
-              else  #name,touchless,mask
-               @rests = Nanao.where('name LIKE ?', "%#{params[:name]}%").where(touchless: true).where(mask: true) 
-              end
-  
-          else
-              if params[:takeout].present?  #name,touchless,takeout
-               @rests = Nanao.where('name LIKE ?', "%#{params[:name]}%").where(touchless: true).where(takeout: true)
-              else  #name,touchless
-               @rests = Nanao.where('name LIKE ?', "%#{params[:name]}%").where(touchless: true)
-              end
-          end
-  
-      else
-          if params[:mask].present?
-             
-              if params[:takeout].present?  #name,mask,takeout
-               @rests = Nanao.where('name LIKE ?', "%#{params[:name]}%").where(mask: true).where(takeout: true) 
-              else  #name,mask
-               @rests = Nanao.where('name LIKE ?', "%#{params[:name]}%").where(mask: true) 
-              end
-  
-          else
-              if params[:takeout].present?  #name,takeout
-               @rests = Nanao.where('name LIKE ?', "%#{params[:name]}%").where(takeout: true)
-              else  #name
-               @rests = Nanao.where('name LIKE ?', "%#{params[:name]}%")
-              end
-          end
-      end
-      
-    else
-
-      if params[:touchless].present?
-   
-           if params[:mask].present?
-   
-               if params[:takeout].present?  #touchless,mask,takeout
-                @rests = Nanao.where(touchless: true).where(mask: true).where(takeout: true) 
-               else  #touchless,mask
-                @rests = Nanao.where(touchless: true).where(mask: true) 
-               end
-   
-           else
-               if params[:takeout].present?  #touchless,takeout
-                 @rests = Nanao.where(touchless: true).where(takeout: true) 
-               else  #touchless
-                 @rests = Nanao.where(touchless: true) 
-               end
-           end
-   
-       else
-           if params[:mask].present?
-   
-               if params[:takeout].present?  #mask,takeout
-                 @rests = Nanao.where(mask: true).where(takeout: true)  
-               else  #mask
-                 @rests = Nanao.where(mask: true)
-               end
-   
-           else
-               if params[:takeout].present?  #takeout
-                 @rests = Nanao.where(takeout: true) 
-               else  #none
-                 @rests = Nanao.none 
-               end
-           end
-       end
-    end
-
-  end
-
-
-
-  def admin
-  end
-
-  def result
-    # Nanao.create(name: params[:name],
-    #         address: params[:address],
-    #         alcohol: params[:alcohol],
-    #         mask: params[:mask],
-    #         time: params[:time],
-    #         takeout: params[:takeout],
-    #         touchless: params[:touchless],
-    #         card: params[:card],
-    #         linepay: params[:linepay],
-    #         paypay: params[:paypay],
-    #         payid: params[:payid],
-    #         quicpay: params[:quicpay],
-    #         seat: params[:seat],
-    #         contact: params[:contact],
-    #         toilet: params[:toilet],
-    #         airing: params[:airing],
-    #         outdoor: params[:outdoor],
-    #         temp: params[:temp],
-    #         atom: params[:atom],
-    #         plate: params[:plate],
-    #         rate: params[:rate])
   end
 
 end

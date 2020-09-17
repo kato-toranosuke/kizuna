@@ -1,24 +1,21 @@
-# README
+# Kizuna
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+master<br>
+|---develop<br>
+      |----feature_add<br>
+      |----feature_fix<br>
 
-Things you may want to cover:
+list.html.erb(店舗検索)
 
-* Ruby version
+register.html.erb<br>
+---ok.js.erb(追加)<br>
+---ng.js.erb(削除)<br>
 
-* System dependencies
+checkdata.html.erb<br>
+---create.js.erb(高評価)<br>
+---destroy.js.erb(低評価)<br>
 
-* Configuration
+update.html.erb<br>
+更新情報のマージ
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

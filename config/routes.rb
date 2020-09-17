@@ -1,25 +1,10 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  get 'welcome/index' => 'welcome#index'
-  get 'welcome/search' => 'welcome#search'
-  get 'welcome/admin' => 'welcome#admin'
-  get 'welcome/result' => 'welcome#result'
-  get 'welcome/comment' => 'welcome#comment'
-  post 'welcome/comment' => 'welcome#comment'
-  get 'welcome/practice' => 'welcome#practice'
-  get 'welcome/practice2' => 'welcome#practice2'
-  post 'welcome/practice2' => 'welcome#practice2'
-  
-
-
-  get 'welcome/ajax' => 'welcome#ajax'
-  post 'welcome/ajax' => 'welcome#ajax'
   get 'welcome/create' => 'welcome#create'
   post 'welcome/create' => 'welcome#create'
 
   get 'welcome/destroy' => 'welcome#destroy'
   post 'welcome/destroy' => 'welcome#destroy'
-
 
   get 'welcome/list' => 'welcome#list'
   post 'welcome/list' => 'welcome#list'
