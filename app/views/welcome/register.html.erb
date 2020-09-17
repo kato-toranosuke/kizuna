@@ -13,7 +13,6 @@
 </head>
 
 <body>
-
     <section class="hero is-primary">
         <div class="hero-body">
             <div class="container">
@@ -21,7 +20,7 @@
                 <h1 class="subtitle">~安心安全の外食をお届け~</h1>
 
             <div class="has-text-right">
-                <%= search_form_for(@q, url: '/welcome/register', method: :get) do |f| %>
+                <%= search_form_for(@q, url: '/register', method: :get) do |f| %>
                     <div style="width: 20%; margin: auto 0 auto auto;">
                         <%= f.label :name, "店名検索：" %>
                         <%= f.search_field :name_cont, class: "input" %>
@@ -50,41 +49,41 @@
     </section>
 
     <div class="box is-inline-block" style=" vertical-align: top; width: 1000px; margin: 50px ;">
-        <%= form_with url: '/welcome/register', method: :post, local: true do |f| %>
-        <div class="field is-horizontal">
-            <div class="field-label is-normal">
-                <label class="label">店名</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <div class="control">
-                        <input class="input " name="name" type="text" placeholder="店名">
-                    </div>
+        <%= form_with url: '/register', method: :post, local: true do |f| %>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">店名</label>
                 </div>
-            </div>
-        </div>
-        <br />
-        <div class="field is-horizontal">
-
-            <div class="field-label is-normal">
-                <label class="label">
-                    <span class="icon">
-                        <i class="fas fa-head-side-mask"></i>
-                    </span> マスク</label>
-            </div>
-            <div class="field-body">
-                <div class="field is-narrow">
-                    <div class="control">
-                        <div class="select is-fullwidth">
-                            <select name="mask">
-                                <option value="指定なし">指定なし</option>
-                                <option value="義務">義務</option>
-                                <option value="推奨">推奨</option>
-                            </select>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input " name="name" type="text" placeholder="店名">
                         </div>
                     </div>
                 </div>
             </div>
+            <br />
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">
+                        <span class="icon">
+                            <i class="fas fa-head-side-mask"></i>
+                        </span> マスク
+                    </label>
+                </div>
+                <div class="field-body">
+                    <div class="field is-narrow">
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select name="mask">
+                                    <option value="指定なし">指定なし</option>
+                                    <option value="義務">義務</option>
+                                    <option value="推奨">推奨</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
         <div class="field is-horizontal">
             <div class="field-label is-normal">
@@ -429,13 +428,6 @@
                     </span>
                     <a href="<%= st.homepage%>"><%= st.homepage%></a>
                     <br />
-                    <!--h6>月：8:30~21:00</h6>
-        <h6>火：8:30~21:00</h6>
-        <h6>水：8:30~21:00</h6>
-        <h6>木：8:30~21:00</h6>
-        <h6>金：8:30~21:00</h6>
-        <h6>土：8:30~21:00</h6>
-        <h6>日：8:30~21:00</h6-->
 
                     <br />
                     <button class="button is-primary is-rounded" onclick="location.href='/welcome/checkdata/12'">
@@ -444,37 +436,6 @@
                         </span>
                         <span>最新情報</span>
                     </button>
-
-                    <!--button class="button is-danger is-rounded" onclick="location.href='<%= st.googlemap%>'">
-            <span class="icon">
-                <i class="fab fa-google"></i>
-            </span>
-        </button> <%= st.googlemap%>
-        <br />
-        <br />
-
-        <button class="button is-danger is-rounded" onclick="location.href='<%= st.googlemap%>'">
-            <span class="icon">
-                <i class="fab fa-google"></i>
-            </span>
-            <span>Google Map</span>
-        </button>
-        <br />
-        <button class="button is-warning is-rounded" onclick="location.href='<%= st.tabelog%>'">
-            <span class="icon">
-                <i class="fas fa-utensils"></i>
-            </span>
-            <span>食べログ</span>
-            :<%= st.tabelog%>
-        </button>
-        <br />
-        <button class="button is-success is-rounded" onclick="location.href='<%= st.homepage%>'">
-            <span class="icon">
-                <i class="fas fa-home"></i>
-            </span>
-            <span>公式HP</span>
-            :<%= st.homepage%>
-        </button-->
                 </div>
                 <% end%>
 </body>

@@ -15,7 +15,7 @@ checkdata.html.erb<br>
 ---create.js.erb(高評価)<br>
 ---destroy.js.erb(低評価)<br>
 
-update.html.erb<br>
-更新情報のマージ
+update.html.erb(更新情報のマージ)<br>
+
 
 

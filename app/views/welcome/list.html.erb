@@ -19,7 +19,7 @@
                 </h6>
 
             <div class="has-text-right">
-                <%= search_form_for(@q, url: '/welcome/list', method: :get) do |f| %>
+                <%= search_form_for(@q, url: '/list', method: :get) do |f| %>
                     <div style="width: 20%; margin: auto 0 auto auto;">
                         <%= f.label :name, "店名検索：" %>
                         <%= f.search_field :name_cont, class: "input" %>
@@ -46,52 +46,6 @@
             </div>
         </div>
     </section>
-
-
-<!--table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Mask</th>
-      <th>Temp</th>
-      <th>Alcohol</th>
-      <th>Takeout</th>
-      <th>Monday</th>
-      <th>Tuesday</th>
-      <th>Wednesday</th>
-      <th>Thursday</th>
-      <th>Friday</th>
-      <th>Saturday</th>
-      <th>Sunday</th>
-      <th>Googlemap</th>
-      <th>Tabelog</th>
-      <th>Homepage</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @rests.each do |rest_model| %>
-      <tr>
-        <td><%= rest_model.name %></td>
-        <td><%= rest_model.mask %></td>
-        <td><%= rest_model.temp %></td>
-        <td><%= rest_model.alcohol %></td>
-        <td><%= rest_model.takeout %></td>
-        <td><%= rest_model.monday %></td>
-        <td><%= rest_model.tuesday %></td>
-        <td><%= rest_model.wednesday %></td>
-        <td><%= rest_model.thursday %></td>
-        <td><%= rest_model.friday %></td>
-        <td><%= rest_model.saturday %></td>
-        <td><%= rest_model.sunday %></td>
-        <td><%= rest_model.googlemap %></td>
-        <td><%= rest_model.tabelog %></td>
-        <td><%= rest_model.homepage %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table-->
 
     <% @rests.each do |rest| %>
     <div class="box is-inline-block" id="<%= rest.id %>" style=" vertical-align: top; width: 450px; margin: 12px ;">
@@ -164,7 +118,7 @@
             日曜日：<%= rest.sunday%>
         </h6>
         <br />
-        <button class="button is-primary is-rounded" onclick="location.href='/welcome/checkdata/<%= rest.id %>'">
+        <button class="button is-primary is-rounded" onclick="location.href='/checkdata/<%= rest.id %>'">
             <span class="icon">
                 <i class="fas fa-code-branch"></i>
             </span>
@@ -192,75 +146,6 @@
         </button>
     </div>
     <% end%>
-
-    <!--div class="box is-inline-block" style=" vertical-align: top; width: 450px; margin: 50px ;">
-        <strong style="font-size: 25px;">大戸屋ごはん処 BiViつくば店</strong>
-        <br />
-        <br />
-        <h6>
-            <span class="icon">
-                <i class="fas fa-head-side-mask"></i>
-            </span>
-            マスク：推奨
-        </h6>
-
-        <h6>
-            <span class="icon">
-                <i class="fas fa-thermometer-three-quarters"></i>
-            </span>
-            検温：あり
-        </h6>
-
-        <h6>
-            <span class="icon">
-                <i class="fas fa-pump-medical"></i>
-            </span>消毒液：あり
-        </h6>
-
-        <h6>
-            <span class="icon">
-                <i class="fas fa-shopping-bag"></i>
-            </span>
-            テイクアウト：公式HPに記載
-        </h6>
-        <br />
-        <h6>月：8:30~21:00</h6>
-        <h6>火：8:30~21:00</h6>
-        <h6>水：8:30~21:00</h6>
-        <h6>木：8:30~21:00</h6>
-        <h6>金：8:30~21:00</h6>
-        <h6>土：8:30~21:00</h6>
-        <h6>日：8:30~21:00</h6>
-
-        <br />
-        <button class="button is-primary is-rounded" onclick="location.href='/welcome/checkdata/12'">
-            <span class="icon">
-                <i class="fas fa-code-branch"></i>
-            </span>
-            <span>最新情報</span>
-        </button>
-        <br />
-        <br />
-        <button class="button is-danger is-rounded" onclick="location.href='https://g.page/ootoya_2234?share'">
-            <span class="icon">
-                <i class="fab fa-google"></i>
-            </span>
-            <span>Google Map</span>
-        </button>
-        <button class="button is-warning is-rounded"
-            onclick="location.href='https://tabelog.com/ibaraki/A0802/A080201/8017905/'">
-            <span class="icon">
-                <i class="fas fa-utensils"></i>
-            </span>
-            <span>食べログ</span>
-        </button>
-        <button class="button is-success is-rounded" onclick="location.href='https://www.ootoya.com/'">
-            <span class="icon">
-                <i class="fas fa-home"></i>
-            </span>
-            <span>公式HP</span>
-        </button>
-    </div-->
 
 </body>
 </html>
