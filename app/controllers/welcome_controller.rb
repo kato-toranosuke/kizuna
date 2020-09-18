@@ -58,6 +58,7 @@ class WelcomeController < ApplicationController
       @com_data.update(status: 1)
 
     end
+    redirect_to "/update/"+(params[:restid]).to_s
   end
 
   def update_ng
@@ -231,6 +232,7 @@ class WelcomeController < ApplicationController
   def checkdata
     @restid=params[:restid]
     gon.record_id="aaa"
+
     #入力
     @upmax_id=UpdateModel.where(rest: @restid).maximum(:record_id)
     @upmax_created=UpdateModel.where(rest: @restid, record_id: @upmax_id)[0][:created_at]
@@ -239,6 +241,72 @@ class WelcomeController < ApplicationController
       i = 0
       j = 0
       week=Array['月', '火', '水', '木', '金', '土', '日']
+      strip=request.remote_ip
+      front=["森の",
+        "湖の",
+        "海の",
+        "滝の",
+        "川の",
+        "谷の",
+        "島の",
+        "山の",
+        "林の",
+        "空の",
+        "丘の",
+        "竹林の",
+        "雪国の",
+        "洞窟の",
+        "北極の",
+        "砂漠の",
+        "北欧の",
+        "西洋の",
+        "東洋の",
+        "南米の",
+        "中東の",
+        "密林の",
+        "沼地の",
+        "川底の",
+        "海辺の",
+        "軒下の",
+        "地底の",
+        "月面の",
+        "裏庭の",
+        "秘境の"]
+    back=[
+        "くま",
+        "ねこ",
+        "いぬ",
+        "とら",
+        "きりん",
+        "うし",
+        "ぞう",
+        "しまうま",
+        "ひつじ",
+        "いのしし",
+        "うさぎ",
+        "くじら",
+        "かめ",
+        "いるか",
+        "かわうそ",
+        "らっこ",
+        "ぺんぎん",
+        "あるぱか",
+        "かぴばら",
+        "りす",
+        "ふくろう",
+        "たぬき",
+        "きつね",
+        "あざらし",
+        "だちょう",
+        "ぱんだ",
+        "こあら",
+        "おおかみ",
+        "となかい",
+        "しか"]
+      f=Digest::SHA3.hexdigest(strip)   
+      strip+="kizuna"
+      b=Digest::SHA3.hexdigest(strip)   
+      @nickname=front[f.hex%30]+back[b.hex%30]+"さん"
       while i < params[:item].length do
         if params[:item][i]=='営業時間' then
           if params[:comment][i]=='全日' then
@@ -246,9 +314,9 @@ class WelcomeController < ApplicationController
               for day in week do
                 pre=SampleUserModel.find_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, day)
                 if pre then
-                  pre.update_attributes(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip)
+                  pre.update_attributes(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
                 else
-                  SampleUserModel.create(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip)
+                  SampleUserModel.create(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
                 end
               end
               j=j+1
@@ -258,9 +326,9 @@ class WelcomeController < ApplicationController
               for day in ['月', '火', '水', '木', '金'] do
                 pre=SampleUserModel.find_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, day)
                 if pre then
-                  pre.update_attributes(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip)
+                  pre.update_attributes(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
                 else
-                  SampleUserModel.create(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip)
+                  SampleUserModel.create(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
                 end
               end
               j=j+1
@@ -270,9 +338,9 @@ class WelcomeController < ApplicationController
               for day in ['土', '日'] do
                 pre=SampleUserModel.find_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, day)
                 if pre then
-                  pre.update_attributes(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip)
+                  pre.update_attributes(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
                 else
-                  SampleUserModel.create(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip)
+                  SampleUserModel.create(rest: params[:restid].to_i,item: day, comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
                 end
               end
               j=j+1
@@ -281,9 +349,9 @@ class WelcomeController < ApplicationController
             if params[:time][j].present? then
               pre=SampleUserModel.find_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, params[:item][i])
               if pre then
-                pre.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: params[:time][j], ipaddress: request.remote_ip)
+                pre.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
               else
-                SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: params[:time][j], ipaddress: request.remote_ip)
+                SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
               end
             end
             j=j+1
@@ -294,9 +362,9 @@ class WelcomeController < ApplicationController
           # SampleUserModel.find_or_initialize_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, params[:item][i]).update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: params[:comment][i], ipaddress: request.remote_ip)
           pre=SampleUserModel.find_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, params[:item][i])
           if pre then
-            pre.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: params[:comment][i], ipaddress: request.remote_ip)
+            pre.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: params[:comment][i], ipaddress: request.remote_ip, nickname: @nickname)
           else
-            SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: params[:comment][i], ipaddress: request.remote_ip)
+            SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: params[:comment][i], ipaddress: request.remote_ip, nickname: @nickname)
           end
         end
          #  Nicole.create(name: params[:name][i], comment: params[:comment][i], ipaddress: request.remote_ip)
@@ -304,6 +372,8 @@ class WelcomeController < ApplicationController
 
          i=i+1
       end
+
+      redirect_to "/checkdata/"+(@restid).to_s
     end
 
     #出力
