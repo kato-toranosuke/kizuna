@@ -82,8 +82,9 @@
                             <% end %>
 
 
-                            <h6><%= com[0].ipaddress %></h6>
-                            <h6><%= com[0].status %></h6>
+                            <!--h6><%= com[0].ipaddress %></h6-->
+                            <h6>From: <%= com[0].nickname %></h6>
+                            <!--h6><%= com[0].status %></h6-->
 
                             <% com.each do |co| %>
                             <p><%= co.item %>: <%= co.comment %> </p>
@@ -127,7 +128,8 @@
                         style=" vertical-align: top; width: 350px; margin: 50px; background-color:  hsl(48, 100%, 67%); ">
                         <!--h6> update_data (record_id: <%= @update_data[i].record_id %> )</h6-->
                         <h5> 更新情報 ( Ver. <%= @update_data[i].record_id %>.0 )</h5>
-                        <h5> <%= @update_data[i].created_at.in_time_zone("Tokyo") %> </h5>
+                        <h6>time: <%= @update_data[i].created_at.in_time_zone("Tokyo") %> </h6>
+                        <h6>------------------------------------------</h6>
                         <h6>
                             <span class="icon">
                                 <i class="fas fa-head-side-mask"></i>

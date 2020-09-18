@@ -1,9 +1,92 @@
-a=""
-if params[:mask].present? || params[:mask].present? ||params[:mask].present?
-    if params[:mask].present?
-        a+="mask: true"
-    if params[:takeout].present?
-        a+="takeout: true"
-    if params[:touchless].present?
-        a+="touchless: true"
-    @rests = Nanao.where(a)
+森の　　
+湖の        
+海の　　
+滝の　　　
+川の
+谷の
+島の　　　
+山の　　　
+林の　　　
+空の　　　
+丘の
+竹林の
+雪国の
+洞窟の
+北極の
+砂漠の　　
+北欧の　　
+西洋の　　　
+東洋の　　
+南米の　　
+中東の　　　
+密林の　　　
+沼地の　　　
+川底の  
+海辺の　　　　
+軒下の
+地底の　　
+月面の
+裏庭の　　　　
+秘境の　　　　
+　　　
+くま
+ねこ
+いぬ
+とら
+きりん
+うし
+ぞう
+しまうま
+ひつじ
+いのしし
+うさぎ
+くじら
+かめ
+いるか
+かわうそ
+らっこ
+ぺんぎん
+あるぱか
+かぴばら
+りす
+ふくろう
+たぬき
+きつね
+あざらし
+だちょう
+ぱんだ
+こあら
+おおかみ
+となかい
+しか
+
+127.0.0.1
+ipaddress="255.255.255.255"
+
+1) 30を法に
+↓数値型に
+ipnum=255255255255
+num = ipnum.modulo(30)  //num=0,1,...,29
+
+
+2)
+255.129.255.255
+↓2進法
+11111111.10000001. ..
+↓ 左5
+11111 10000 
+↓
+31 16
+↓相加平均
+24
+
+----
+ip="255.210.127.054"
+
+a= ip.slice(0..2).to_i
+b= ip.slice(4..6).to_i
+c= ip.slice(8..10).to_i
+d= ip.slice(12..14).to_i
+
+p (a+b) % 30  //15
+p (c+d) % 30  //1

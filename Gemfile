@@ -67,4 +67,4 @@ gem 'font-awesome-sass'
 # 検索
 gem 'ransack'
 
-# gem "actionview", ">= 6.0.3.3"
+gem 'digest-sha3', '~> 1.1'
