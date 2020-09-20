@@ -5,4 +5,6 @@ INSERT INTO nicole (id,name,comment) VALUES (3,'192.15','マスク');
 
 INSERT INTO nicole (id,name,comment) VALUES (4,'12.15','ト');
 INSERT INTO nicole (id,name,comment) VALUES (5,'12.15','マ');
+INSERT INTO sample_user_model (rest,nickname) VALUES (1,'aaka');
 
+INSERT INTO sample_user_models (item, comment, ipaddress,rest,created_at, updated_at, nickname) VALUES ('マスク','指定なし','127.0.0.1',1,'2020-09-18 04:33:57.576301','2020-09-18 04:33:57.576301','aaka');
