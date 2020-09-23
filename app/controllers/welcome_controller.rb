@@ -1,4 +1,24 @@
+require 'digest/md5'
 class WelcomeController < ApplicationController
+  #---digest認証---
+  #REALM = "SuperSecret"
+  #USERS = {"kadmin" => "secret", #plain text password
+  #         "dap" => Digest::MD5.hexdigest(["dap", REALM, "testsecret"].join(":"))}
+  REALM = 'SecretZone'.freeze
+  USERS = { 'kizuna' => Digest::MD5.hexdigest(['kizuna', REALM, 'enpitpassword'].join(':'))}.freeze
+
+  before_action :authenticate, only: [:register, :update]
+
+  private
+  def authenticate
+    authenticate_or_request_with_http_digest(REALM) do |username|
+      USERS[username]
+    end
+  end
+  #------
+
+  public
+
   protect_from_forgery :except => [:checkdata]
 
   def update_ok
@@ -166,14 +186,32 @@ class WelcomeController < ApplicationController
   end
 
   def list
-    # @rests=RestModel.all
-    @q = RestModel.ransack(params[:q])
-    @rests = @q.result(distinct: true)
+    if  params[:q].present?
+      @all_hira = params[:q]
+
+      #破壊的メソッドを実行してもお互いに影響を及ぼさないようにコピー
+      @all_kata = @all_hira.dup
+      #ひらがなをカタカナに、カタカナをひらがなに
+      @all_kata['name_cont'] = @all_kata['name_cont'].tr('ぁ-ん ァ-ン','ァ-ン ぁ-ん')
+      
+
+      @q = RestModel.ransack(@all_hira)
+      @rests = @q.result(distinct: true)
+      @q_2 = RestModel.ransack(@all_kata)
+      @rests_2 = @q_2.result(distinct: true)
+
+    else
+      @all_hira = @all_kata 
+
+      @q = RestModel.ransack(params[:q])
+      @rests = @q.result(distinct: true)
+
+    end
   end
 
   def ok
     @st=StackRestModel.find(params[:stid].to_i)
-    RestModel.create(name: @st.name, mask: @st.mask, temp: @st.temp, alcohol: @st.alcohol, takeout: @st.takeout, monday: @st.monday, tuesday: @st.tuesday, wednesday: @st.wednesday, thursday: @st.thursday, friday: @st.friday, saturday: @st.saturday, sunday: @st.sunday, googlemap: @st.googlemap, tabelog: @st.tabelog, homepage: @st.homepage)
+    RestModel.create(name: @st.name, area: @st.area,mask: @st.mask, temp: @st.temp, alcohol: @st.alcohol, takeout: @st.takeout, monday: @st.monday, tuesday: @st.tuesday, wednesday: @st.wednesday, thursday: @st.thursday, friday: @st.friday, saturday: @st.saturday, sunday: @st.sunday, googlemap: @st.googlemap, tabelog: @st.tabelog, homepage: @st.homepage)
     @restid=RestModel.maximum(:id)
     UpdateModel.create(record_id: 1, rest: @restid, mask:@st.mask,  temp: @st.temp, alcohol: @st.alcohol, takeout: @st.takeout, monday: @st.monday, tuesday: @st.tuesday, wednesday: @st.wednesday, thursday: @st.thursday, friday: @st.friday, saturday: @st.saturday, sunday: @st.sunday,  takeout:@st.takeout)
     StackRestModel.delete(params[:stid].to_i)
@@ -349,9 +387,9 @@ class WelcomeController < ApplicationController
             if params[:time][j].present? then
               pre=SampleUserModel.find_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, params[:item][i])
               if pre then
-                pre.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
+                pre.update_attributes(rest: params[:restid].to_i,item: params[:comment][i], comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
               else
-                SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
+                SampleUserModel.create(rest: params[:restid].to_i,item: params[:comment][i], comment: params[:time][j], ipaddress: request.remote_ip, nickname: @nickname)
               end
             end
             j=j+1
@@ -404,6 +442,9 @@ class WelcomeController < ApplicationController
       @all_comments.push(@comments)
     end
 
+  end
+
+  def about
   end
 
 end

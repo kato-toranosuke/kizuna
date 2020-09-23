@@ -28,7 +28,8 @@ Rails.application.routes.draw do
   get 'update_ng' => 'welcome#update_ng'
   post 'update_ng' => 'welcome#update_ng'
 
-
+  get 'about' => 'welcome#about'
+  post 'about' => 'welcome#about'
 
   #  resources :welcome do
     #  get :search, on: :collection

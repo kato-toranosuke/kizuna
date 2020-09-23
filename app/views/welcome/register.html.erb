@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>店舗登録</title>
+    <title>店舗登録 | Kizuna</title>
     <style>
         #check {
             border-radius: 500px;
@@ -17,7 +17,7 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title is-1 has-text-left">Kizuna</h1>
-                <h1 class="subtitle">~安心安全の外食をお届け~</h1>
+                <h1 class="subtitle">~安心安全の外食のためのサイト~</h1>
 
             <div class="has-text-right">
                 <%= search_form_for(@q, url: '/register', method: :get) do |f| %>
@@ -25,6 +25,12 @@
                         <%= f.label :name, "店名検索：" %>
                         <%= f.search_field :name_cont, class: "input" %>
                     </div>
+
+<div style="width: 20%; margin: auto 0 auto auto;">
+    <%= f.label :area, "エリア検索：" %>
+    <!--%= f.search_field :area_cont, class: "input" %-->
+</div>
+
                     <br>
                     <%= f.label :mask, "マスク着用義務  " %>
                     <%= f.check_box :mask_eq, { include_hidden: false, class: "checkbox" }, '義務', ' ' %>　
@@ -347,6 +353,9 @@
                     <strong style="font-size: 25px;"><%= st.name%></strong>
                     <br />
                     <br />
+
+<h6>エリア:<% st.area %>
+
                     <h6>
                         <span class="icon">
                             <i class="fas fa-head-side-mask"></i>
