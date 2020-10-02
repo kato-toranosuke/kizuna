@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get 'about' => 'welcome#about'
   post 'about' => 'welcome#about'
 
+  get 'login' => 'welcome#login'
+  post 'login' => 'welcome#login'
+
   #  resources :welcome do
     #  get :search, on: :collection
   #  end

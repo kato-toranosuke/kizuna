@@ -1,0 +1,20 @@
+    if  params[:q].present?
+      @all_hira = params[:q]   #「あ」→「あ」、「ア」→「ア」
+
+      #破壊的メソッドを実行してもお互いに影響を及ぼさないようにコピー
+      @all_kata = @all_hira.dup    
+
+      #「あ」→「ア」、「ア」→「あ」を検索
+      @all_kata['name_cont'] = @all_kata['name_cont'].tr('ぁ-ん ァ-ン','ァ-ン ぁ-ん')
+      
+      @q = RestModel.ransack(@all_hira)
+      @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
+      @q_2 = RestModel.ransack(@all_kata)
+      @rests_2 = @q_2.result(distinct: true)
+
+    else
+      @all_hira = @all_kata 
+
+      @q = RestModel.ransack(params[:q])
+      @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
+    end

@@ -20,6 +20,13 @@ class WelcomeController < ApplicationController
   public
 
   protect_from_forgery :except => [:checkdata]
+  require './app/viewclass/hoge'
+
+  def login
+    # hoge = Hoge.new
+    # @check=hoge.syori("Hello")
+    @check=params
+  end
 
   def update_ok
     # @update_item=params[:item][0]
@@ -41,6 +48,12 @@ class WelcomeController < ApplicationController
     @friday=@latest[0][:friday]
     @saturday=@latest[0][:saturday]
     @sunday=@latest[0][:sunday]
+
+    @elec=@latest[0][:elec]
+    @card=@latest[0][:card]
+    @qr=@latest[0][:qr]
+
+
 
     i=0
     # 更新
@@ -68,11 +81,17 @@ class WelcomeController < ApplicationController
           @saturday=params[:comment][i]
         elsif params[:item][i]=='日' then
           @sunday=params[:comment][i]
+        elsif params[:item][i]=='電子マネー' then
+          @elec=params[:comment][i]
+        elsif params[:item][i]=='クレジットカード' then
+          @card=params[:comment][i]
+        elsif params[:item][i]=='QRコード決済' then
+          @qr=params[:comment][i]
         end
         i=i+1
       end
-      UpdateModel.create(rest: params[:restid], record_id: @record_id, mask: @mask, temp: @temp, alcohol: @alcohol, takeout: @takeout, monday: @monday, tuesday: @tuesday, wednesday: @wednesday, thursday: @thursday, friday: @friday, saturday: @saturday, sunday: @sunday)
-      RestModel.find(params[:restid]).update_attributes(mask: @mask, temp: @temp, alcohol: @alcohol, takeout: @takeout, monday: @monday, tuesday: @tuesday, wednesday: @wednesday, thursday: @thursday, friday: @friday, saturday: @saturday, sunday: @sunday)
+      UpdateModel.create(rest: params[:restid], record_id: @record_id, mask: @mask, temp: @temp, alcohol: @alcohol, takeout: @takeout, monday: @monday, tuesday: @tuesday, wednesday: @wednesday, thursday: @thursday, friday: @friday, saturday: @saturday, sunday: @sunday , elec: @elec, card: @card, qr: @qr)
+      RestModel.find(params[:restid]).update_attributes(mask: @mask, temp: @temp, alcohol: @alcohol, takeout: @takeout, monday: @monday, tuesday: @tuesday, wednesday: @wednesday, thursday: @thursday, friday: @friday, saturday: @saturday, sunday: @sunday, elec: @elec, card: @card, qr: @qr)
       # statusに1をセット
       @com_data=SampleUserModel.find(params[:comid])
       @com_data.update(status: 1)
@@ -186,34 +205,36 @@ class WelcomeController < ApplicationController
   end
 
   def list
-    if  params[:q].present?
-      @all_hira = params[:q]
+
+
+    
+#    if  params[:q].present?
+#      @all_hira = params[:q]   #「あ」→「あ」、「ア」→「ア」
 
       #破壊的メソッドを実行してもお互いに影響を及ぼさないようにコピー
-      @all_kata = @all_hira.dup
-      #ひらがなをカタカナに、カタカナをひらがなに
-      @all_kata['name_cont'] = @all_kata['name_cont'].tr('ぁ-ん ァ-ン','ァ-ン ぁ-ん')
+#      @all_kata = @all_hira.dup    
+
+      #「あ」→「ア」、「ア」→「あ」を検索
+#      @all_kata['name_cont'] = @all_kata['name_cont'].tr('ぁ-ん ァ-ン','ァ-ン ぁ-ん')
       
+#      @q = RestModel.ransack(@all_hira)
+#      @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
+#      @q_2 = RestModel.ransack(@all_kata)
+#      @rests_2 = @q_2.result(distinct: true)
 
-      @q = RestModel.ransack(@all_hira)
-      @rests = @q.result(distinct: true)
-      @q_2 = RestModel.ransack(@all_kata)
-      @rests_2 = @q_2.result(distinct: true)
+#    else
+#      @all_hira = @all_kata 
 
-    else
-      @all_hira = @all_kata 
-
-      @q = RestModel.ransack(params[:q])
-      @rests = @q.result(distinct: true)
-
-    end
+#      @q = RestModel.ransack(params[:q])
+#      @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
+#    end
   end
 
   def ok
     @st=StackRestModel.find(params[:stid].to_i)
-    RestModel.create(name: @st.name, area: @st.area,mask: @st.mask, temp: @st.temp, alcohol: @st.alcohol, takeout: @st.takeout, monday: @st.monday, tuesday: @st.tuesday, wednesday: @st.wednesday, thursday: @st.thursday, friday: @st.friday, saturday: @st.saturday, sunday: @st.sunday, googlemap: @st.googlemap, tabelog: @st.tabelog, homepage: @st.homepage)
+    RestModel.create(name: @st.name, area: @st.area,mask: @st.mask, temp: @st.temp, alcohol: @st.alcohol, takeout: @st.takeout, monday: @st.monday, tuesday: @st.tuesday, wednesday: @st.wednesday, thursday: @st.thursday, friday: @st.friday, saturday: @st.saturday, sunday: @st.sunday, googlemap: @st.googlemap, tabelog: @st.tabelog, homepage: @st.homepage, elec: @st.elec, card: @st.card, qr: @st.qr)
     @restid=RestModel.maximum(:id)
-    UpdateModel.create(record_id: 1, rest: @restid, mask:@st.mask,  temp: @st.temp, alcohol: @st.alcohol, takeout: @st.takeout, monday: @st.monday, tuesday: @st.tuesday, wednesday: @st.wednesday, thursday: @st.thursday, friday: @st.friday, saturday: @st.saturday, sunday: @st.sunday,  takeout:@st.takeout)
+    UpdateModel.create(record_id: 1, rest: @restid, mask:@st.mask,  temp: @st.temp, alcohol: @st.alcohol, takeout: @st.takeout, monday: @st.monday, tuesday: @st.tuesday, wednesday: @st.wednesday, thursday: @st.thursday, friday: @st.friday, saturday: @st.saturday, sunday: @st.sunday,  takeout:@st.takeout, elec: @st.elec, card: @st.card, qr: @st.qr)
     StackRestModel.delete(params[:stid].to_i)
   end
 
@@ -238,9 +259,15 @@ class WelcomeController < ApplicationController
     @googlemap=params[:googlemap]
     @tabelog=params[:tabelog]
     @homepage=params[:homepage]
+    @area=params[:area]
+  
+    @elec=params[:elec]
+    @card=params[:card]
+    @qr=params[:qr]
 
     if params[:name].present?
-      StackRestModel.create(name: params[:name], mask: params[:mask], temp: params[:temp], alcohol: params[:alcohol], takeout: params[:takeout], monday: params[:monday], tuesday: params[:tuesday], wednesday: params[:wednesday], thursday: params[:thursday], friday: params[:friday], saturday: params[:saturday], sunday: params[:sunday] , googlemap: params[:googlemap], tabelog: params[:tabelog], homepage: params[:homepage])
+      #エリア名なし StackRestModel.create(name: params[:name], mask: params[:mask], temp: params[:temp], alcohol: params[:alcohol], takeout: params[:takeout], monday: params[:monday], tuesday: params[:tuesday], wednesday: params[:wednesday], thursday: params[:thursday], friday: params[:friday], saturday: params[:saturday], sunday: params[:sunday] , googlemap: params[:googlemap], tabelog: params[:tabelog], homepage: params[:homepage])
+      StackRestModel.create(name: params[:name], area: params[:area], mask: params[:mask], temp: params[:temp], alcohol: params[:alcohol], takeout: params[:takeout], monday: params[:monday], tuesday: params[:tuesday], wednesday: params[:wednesday], thursday: params[:thursday], friday: params[:friday], saturday: params[:saturday], sunday: params[:sunday] , googlemap: params[:googlemap], tabelog: params[:tabelog], homepage: params[:homepage], elec: params[:elec], card: params[:card], qr: params[:qr])
     end
 
     #@stack=StackRestModel.all
@@ -268,13 +295,19 @@ class WelcomeController < ApplicationController
   # SampleUserModel.find_or_initialize_by(ipaddress: request.remote_ip, item: params[:item][i]).update_attributes(item: params[:item][i], comment: params[:comment][i], ipaddress: request.remote_ip)
   
   def checkdata
+    logger.debug("========debug=========")
+    logger.debug(params)
+    # logger.debug("item: "+params[:item]+", comment: "+params[:comment])
+    logger.debug("======================")
     @restid=params[:restid]
     gon.record_id="aaa"
-
+    
+    @rest_name=RestModel.find(@restid)[:name]
     #入力
     @upmax_id=UpdateModel.where(rest: @restid).maximum(:record_id)
     @upmax_created=UpdateModel.where(rest: @restid, record_id: @upmax_id)[0][:created_at]
-        
+    
+    
     if params[:item].present?
       i = 0
       j = 0
@@ -346,7 +379,155 @@ class WelcomeController < ApplicationController
       b=Digest::SHA3.hexdigest(strip)   
       @nickname=front[f.hex%30]+back[b.hex%30]+"さん"
       while i < params[:item].length do
-        if params[:item][i]=='営業時間' then
+        
+        if params[:item][i]=='電子マネー' || params[:item][i]=='クレジットカード' || params[:item][i]=='QRコード決済' then
+          touch_item = params[:item][i]
+          touch_comment=params[:comment][i]
+
+          if params[:item][i]=='電子マネー' then
+            touch_name=params[:elec][i]
+            update_touch=UpdateModel.where(rest: @restid, record_id: @upmax_id)[0][:elec]
+          elsif params[:item][i]=='クレジットカード' then
+            touch_name=params[:card][i]
+            update_touch=UpdateModel.where(rest: @restid, record_id: @upmax_id)[0][:card]
+          elsif params[:item][i]=='QRコード決済' then
+             touch_name=params[:qr][i]
+             update_touch=UpdateModel.where(rest: @restid, record_id: @upmax_id)[0][:qr]
+            end
+
+          if params[:comment][i]=='追加' then
+            if touch_name=='その他' then
+              if params[:item][i]=='電子マネー' then
+                touch_name=params[:elec_others][i]
+              elsif params[:item][i]=='クレジットカード' then
+                touch_name=params[:card_others][i]
+              elsif params[:item][i]=='QRコード決済' then
+                 touch_name=params[:qr_others][i]
+              end
+            end
+            pre_user_input=SampleUserModel.find_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, touch_item)
+              
+            # 同じユーザの以前までの入力をチェック
+              # 以前までの入力なし
+              if pre_user_input.blank? then
+                # 前回の更新情報はnull?
+                if update_touch.blank?
+                  touch_string=touch_name
+                # 前回と同じ事言ってる
+                elsif update_touch.include?(touch_name)
+                  touch_string=update_touch
+                # 新しい！
+                elsif update_touch.present?
+                  touch_string=update_touch+', '+touch_name
+                end
+                SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+
+              elsif pre_user_input[:comment].blank? then
+                # 前回の更新情報はnull?
+                if update_touch.blank?
+                  touch_string=touch_name
+                # 前回と同じ事言ってる
+                elsif update_touch.include?(touch_name)
+                  touch_string=update_touch
+                # 新しい！
+                elsif update_touch.present?
+                  touch_string=update_touch+', '+touch_name
+                end
+                SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+              # 以前までの入力と同じこと言ってる
+              elsif pre_user_input[:comment].include?(touch_name) then
+                @donothing="do nothing"
+              # 以前までとは違う入力
+              else
+                if update_touch.blank?
+                  touch_string=pre_user_input[:comment]+', '+touch_name
+                elsif update_touch.include?(touch_name)
+                  touch_string=update_touch+', '+pre_user_input[:comment]
+                elsif update_touch.present?
+                  touch_string=update_touch+', '+pre_user_input[:comment]+', '+touch_name
+                end
+                pre_user_input.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+              end              
+
+
+
+          elsif params[:comment][i]=='削除' then
+            if touch_name=='その他' then
+              if params[:item][i]=='電子マネー' then
+                touch_name=params[:elec_others][i]
+              elsif params[:item][i]=='クレジットカード' then
+                touch_name=params[:card_others][i]
+              elsif params[:item][i]=='QRコード決済' then
+                 touch_name=params[:qr_others][i]
+              end
+            end
+
+              pre_user_input=SampleUserModel.find_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, params[:item][i])
+              
+              # 同じユーザの以前までの入力をチェック
+              # 以前までの入力なし
+              if pre_user_input.blank? then
+                # 前回の更新情報はnull?
+                if update_touch.blank?
+                  @donothing="do nothing"
+                  # touch_string=touch_name
+                # 前回の更新情報に含まれる
+                elsif update_touch.include?(touch_name)
+                  if(update_touch.include?(touch_name+', ')) then
+                    touch_string = update_touch.gsub!(touch_name+', ', "")
+                  elsif(update_touch.include?(', '+touch_name)) then
+                    touch_string = update_touch.gsub!(', '+touch_name, "")
+                  end
+                # 新しい！
+                elsif update_touch.present?
+                  @donothing="do nothing"
+                  # touch_string=update_touch+', '+touch_name
+                end
+                SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+
+              elsif pre_user_input[:comment].blank? then
+                # 前回の更新情報はnull?
+                if update_touch.blank?
+                  @donothing="do nothing"
+                  # touch_string=touch_name
+                # 前回の更新情報に含まれる
+                elsif update_touch.include?(touch_name)
+                  if(update_touch.include?(touch_name+', ')) then
+                    touch_string = update_touch.gsub!(touch_name+', ', "")
+                  elsif(update_touch.include?(', '+touch_name)) then
+                    touch_string = update_touch.gsub!(', '+touch_name, "")
+                  end
+                # 新しい！
+                elsif update_touch.present?
+                  @donothing="do nothing"
+                  # touch_string=update_touch+', '+touch_name
+                end
+                SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+              # 以前までの入力に含まれる
+              elsif pre_user_input[:comment].include?(touch_name) then
+                # @donothing="do nothing"
+                if(pre_user_input[:comment].include?(touch_name+', ')) then
+                  touch_string = pre_user_input[:comment].gsub!(touch_name+', ', "")
+                elsif(pre_user_input[:comment].include?(', '+touch_name)) then
+                  touch_string = pre_user_input[:comment].gsub!(', '+touch_name, "")
+                end
+                pre_user_input.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+              # 以前までとは違う入力
+              # else
+                # if update_touch.blank?
+                  # touch_string=pre_user_input[:comment]+', '+touch_name
+                # elsif update_touch.include?(touch_name)
+                  # touch_string=update_touch+', '+pre_user_input[:comment]
+                # elsif update_touch.present?
+                  # touch_string=update_touch+', '+pre_user_input[:comment]+', '+touch_name
+                # end
+                # pre_user_input.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+              end              
+
+          end
+          # elsif params[:comment][i]=='削除'
+        
+        elsif params[:item][i]=='営業時間' then
           if params[:comment][i]=='全日' then
             if params[:time][j].present? then
               for day in week do

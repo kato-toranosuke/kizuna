@@ -68,3 +68,6 @@ gem 'font-awesome-sass'
 gem 'ransack'
 
 gem 'digest-sha3', '~> 1.1'
+
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'

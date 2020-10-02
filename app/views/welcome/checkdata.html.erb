@@ -26,17 +26,22 @@
 </head>
 
 <body>
+    <%= @pall %>
     <section class="hero is-primary">
         <div class="hero-body">
             <div class="container">
-                <a href="/list" style="text-decoration: none;"><h1 class="title is-1 has-text-left">Kizuna</h1></a>
+                <a href="/list" style="text-decoration: none;">
+                    <h1 class="title is-1 has-text-left">Kizuna</h1>
+                </a>
                 <h1 class="subtitle">~安心安全の外食をお届け~</h1>
-            <div class="has-text-right">
-            </div>
-
+                <%# <div class="buttons has-addons is-right"> %>
+                <%# <button class="button is-primary is-light " onclick="location.href='/list'">Home</button> %>
+                <%# </div> %>
             </div>
         </div>
     </section>
+ <button class="button is-primary is-light "><%= @rest_name %></button>
+
     <div class="columns">
         <div class="scrolling-wrapper" id="wrp">
 
@@ -118,9 +123,9 @@
                         <!--h6> update_data (record_id: <%= @update_data[i].record_id %> )</h6-->
                         <h5> 更新情報 ( Ver. <%= @update_data[i].record_id %>.0 )</h5>
                         <h6>time: <%= @update_data[i].created_at.in_time_zone("Tokyo") %> </h6>
-                        <h6>------------------------------------------</h6>                        
+                        <h6>------------------------------------------</h6>
 
-                         <h6>
+                        <h6>
                             <span class="icon">
                                 <i class="fas fa-head-side-mask"></i>
                             </span>
@@ -143,6 +148,24 @@
                                 <i class="fas fa-shopping-bag"></i>
                             </span>
                             テイクアウト：<%= @update_data[i].takeout %>
+                        </h6>
+                                                <h6>
+                            <span class="icon">
+                                <i class="far fa-credit-card"></i>
+                            </span>
+                            電子マネー：<%= @update_data[i].elec %>
+                        </h6>
+                        <h6>
+                            <span class="icon">
+                                <i class="fas fa-credit-card"></i>
+                            </span>
+                            クレジットカード：<%= @update_data[i].card %>
+                        </h6>
+                                                <h6>
+                            <span class="icon">
+                                <i class="fas fa-qrcode"></i>
+                            </span>
+                            QRコード決済：<%= @update_data[i].qr %>
                         </h6>
                         <h6>
                             <span class="icon">
@@ -186,6 +209,8 @@
                             </span>
                             日曜日：<%= @update_data[i].sunday %>
                         </h6>
+                        
+
 
                     </div>
                     <% end %>
@@ -4281,11 +4306,73 @@
 
                     }
                 }
-
+                function elec_otherschangefunc(obj) {
+                    console.log(obj);
+                    var field_num = obj.id.replace(/[^0-9]/g, '');
+                    console.log(obj.value)
+                    var time = document.getElementById('time' + field_num);
+                    if (time != null) {
+                        time.remove();
+                    }
+                    if(obj.value=="その他"){
+                        console.log("その他");
+                        var field = document.getElementById('field' + field_num).lastElementChild;
+                        opt = document.createElement("div");
+                        opt.id = "time" + field_num;
+                        opt.innerHTML =
+                        "<div class='control'><input name='elec_others[]' style='width:100px' class='input' type='text'  placeholder='KizunaPay'></div>";
+                        field.appendChild(opt);
+                        console.log(obj.parentNode)
+                        console.log(field)
+                    }
+                }
+                function card_otherschangefunc(obj) {
+                    var field_num = obj.id.replace(/[^0-9]/g, '');
+                    console.log(obj.value)
+                    var time = document.getElementById('time' + field_num);
+                    if (time != null) {
+                        time.remove();
+                    }
+                    if(obj.value=="その他"){
+                        console.log("その他");
+                        var field = document.getElementById('field' + field_num).lastElementChild;
+                        opt = document.createElement("div");
+                        opt.id = "time" + field_num;
+                        opt.innerHTML =
+                        "<div class='control'><input name='card_others[]' style='width:100px' class='input' type='text' placeholder='KizunaPay'></div>";
+                        field.appendChild(opt);
+                        console.log(obj.parentNode)
+                        console.log(field)
+                    }
+                }
+                function qr_otherschangefunc(obj) {
+                    var field_num = obj.id.replace(/[^0-9]/g, '');
+                    console.log(obj.value)
+                    var time = document.getElementById('time' + field_num);
+                    if (time != null) {
+                        time.remove();
+                    }
+                    if(obj.value=="その他"){
+                        console.log("その他");
+                        var field = document.getElementById('field' + field_num).lastElementChild;
+                        opt = document.createElement("div");
+                        opt.id = "time" + field_num;
+                        opt.innerHTML =
+                        "<div class='control'><input name='qr_others[]' style='width:100px' class='input' type='text' placeholder='KizunaPay'></div>";
+                        field.appendChild(opt);
+                        console.log(obj.parentNode)
+                        console.log(field)
+                    }
+                }
                 function changefunc(obj) {
                     var field_num = obj.id.replace(/[^0-9]/g, '');
+                    // var parent_node= document.getElementById('horizonal' + field_num);
                     var sel = document.getElementById('comment' + field_num);
+                    var first_child_node=sel.parentNode.parentNode.parentNode;
                     var time = document.getElementById('time' + field_num);
+                    var elec = document.getElementById('elec' + field_num);
+                    var card = document.getElementById('card' + field_num);
+                    var qr = document.getElementById('qr' + field_num);
                     var formicon = document.getElementById('formicon' + field_num);
 
                     while (sel.lastChild) {
@@ -4293,6 +4380,15 @@
                     }
                     if (time != null) {
                         time.remove();
+                    }
+                    if (elec != null) {
+                        elec.remove();
+                    }
+                    if (card != null) {
+                        card.remove();
+                    }
+                    if (qr != null) {
+                        qr.remove();
                     }
                     if (obj.value == 'マスク') {
                         formicon.className = "fas fa-head-side-mask";
@@ -4350,7 +4446,112 @@
                         opt.value = "あり(公式HPに記載あり)";
                         opt.text = "あり(公式HPに記載あり)";
                         sel.appendChild(opt);
-                    } else if (obj.value == '営業時間') {
+                    }　else if (obj.value == '電子マネー') {
+                        formicon.className = "fas fa-credit-card";
+
+                        var opt = document.createElement("option");
+                        opt.value = "追加";
+                        opt.text = "追加";
+                        sel.appendChild(opt);
+                        opt = document.createElement("option");
+                        opt.value = "削除";
+                        opt.text = "削除";
+                        sel.appendChild(opt);
+
+                        var field = document.getElementById('field' + field_num).lastElementChild;
+                        console.log(field);
+                        var opt = document.createElement("div");
+                        opt.id = "elec" + field_num;
+                        opt.innerHTML = "<div class='control'><div class='select' >"+
+                        "<select name='elec[]' id='elec"+field_num+"'onchange='elec_otherschangefunc(this)'>"+
+                        "<option value='楽天Edy'>楽天Edy</option>"+                       
+                        "<option value='nanaco'>nanaco</option>"+                       
+                        "<option value='WAON'>WAON</option>"+                       
+                        "<option value='iD'>iD</option>"+                       
+                        "<option value='QUICPay'>QUICPay</option>"+                       
+                        "<option value='Tマネー'>Tマネー</option>"+                       
+                        "<option value='交通系電子マネー'>交通系電子マネー</option>"+                       
+                        "<option value='その他'>その他</option>"+                       
+                        "</select>"+
+                        "</div></div>";
+                        field.appendChild(opt);
+                    }  else if (obj.value == 'クレジットカード') {
+                        formicon.className = "far fa-credit-card";
+
+                       var opt = document.createElement("option");
+                        opt.value = "追加";
+                        opt.text = "追加";
+                        sel.appendChild(opt);
+                        opt = document.createElement("option");
+                        opt.value = "削除";
+                        opt.text = "削除";
+                        sel.appendChild(opt);
+
+                        var field = document.getElementById('field' + field_num).lastElementChild;
+                        console.log(field);
+                        var opt = document.createElement("div");
+                        opt.id = "card" + field_num;
+                        opt.innerHTML = "<div class='control'><div class='select' >"+
+                        "<select name='card[]' id='card"+field_num+"' onchange='card_otherschangefunc(this)'>"+
+                        "<option value='Visa'>VISA</option>"+                       
+                        "<option value='MasterCard'>MasterCard</option>"+                       
+                        "<option value='JCB'>JCB</option>"+                       
+                        "<option value='AMEX'>AMEX</option>"+                       
+                        "<option value='Diners'>Diners</option>"+                       
+                        "<option value='銀聯'>銀聯</option>"+                       
+                        "<option value='その他'>その他</option>"+                       
+                        "</select>"+
+                        "</div></div>";
+                        field.appendChild(opt);
+                    }  else if (obj.value == 'QRコード決済') {
+                        formicon.className = "fas fa-qrcode";
+
+                        var opt = document.createElement("option");
+                        opt.value = "追加";
+                        opt.text = "追加";
+                        sel.appendChild(opt);
+                        opt = document.createElement("option");
+                        opt.value = "削除";
+                        opt.text = "削除";
+                        sel.appendChild(opt);
+
+                        var field = document.getElementById('field' + field_num).lastElementChild;
+                        console.log(field);
+                        var opt = document.createElement("div");
+                        opt.id = "qr" + field_num;
+                        opt.innerHTML = "<div class='control'><div class='select' >"+
+                        "<select name='qr[]' id='qr"+field_num+"' onchange='qr_otherschangefunc(this)'>"+
+                        "<option value='PayPay'>PayPay</option>"+                       
+                        "<option value='au Pay'>au Pay</option>"+                       
+                        "<option value='d払い'>d払い</option>"+                       
+                        "<option value='楽天ペイ'>楽天ペイ</option>"+                       
+                        "<option value='ファミペイ'>ファミペイ</option>"+                       
+                        "<option value='メルペイ'>メルペイ</option>"+                       
+                        "<option value='Line Pay'>Line Pay</option>"+                       
+                        "<option value='ゆうちょPay'>ゆうちょPay</option>"+                       
+                        "<option value='J-COIN Pay'>J-COIN Pay</option>"+                       
+                        "<option value='その他'>その他</option>"+                       
+                        "</select>"+
+                        "</div></div>";
+                        field.appendChild(opt);
+                        // opt = document.createElement("div");
+                        // opt.id = "time" + field_num;
+                        // opt.innerHTML =
+                            // "<div class='control'><input name='time[]' style='width:280px' class='input' type='text' onKeyUp='OnTimeInput(this)' placeholder='8:00~14:00, 18:00~21:00'></div>";
+                        // field.appendChild(opt);
+                        // var opt = document.createElement("h5");
+                        // opt.innerHTML = "追加";
+                        // // parent_node.prepend(opt);
+
+                        // // console.log(parent_node)
+                        // console.log(first_child_node)
+                        // console.log(first_child_node.lastElementChild)
+
+                        // first_child_node.insertBefore(opt, first_child_node.lastElementChild);
+                    }  
+
+
+                    else if (obj.value == '営業時間') {
                         formicon.className = "far fa-clock";
 
                         var opt = document.createElement("option");
@@ -4429,6 +4630,9 @@
                         '              <option value="検温">検温</option>' +
                         '             <option value="消毒液">消毒液</option>' +
                         '            <option value="テイクアウト">テイクアウト</option>' +
+                        '            <option value="電子マネー">電子マネー</option>' +
+                        '            <option value="クレジットカード">クレジットカード</option>' +
+                        '            <option value="QRコード決済">QRコード決済</option>' +
                         '           <option value="営業時間">営業時間</option>' +
                         '      </select>' +
                         '     <span class="icon is-small is-left">' +
@@ -4440,7 +4644,7 @@
 
                         '<div class="control">' +
                         '   <div class="select">' +
-                        '      <select id="comment1" name="comment[]">' +
+                        '      <select id="comment1" name="comment[]" >' +
                         '         <option value="指定なし">指定なし</option>' +
                         '        <option value="推奨">推奨</option>' +
                         '       <option value="義務">義務</option>' +
@@ -4505,6 +4709,9 @@
                         '                  <option value="検温">検温</option>' +
                         '                 <option value="消毒液">消毒液</option>' +
                         '                <option value="テイクアウト">テイクアウト</option>' +
+                        '            <option value="電子マネー">電子マネー</option>' +
+                        '            <option value="クレジットカード">クレジットカード</option>' +
+                        '            <option value="QRコード決済">QRコード決済</option>' +
                         '               <option value="営業時間">営業時間</option>' +
                         '          </select>' +
                         '         <span class="icon is-small is-left">' +
@@ -4518,7 +4725,7 @@
                         ' <div class="control">' +
                         '      <div class="select">' +
                         '           <select id="comment' + String(field_num) +
-                        '" name="comment[]">' +
+                        '" name="comment[]" >' +
                         '                <option value="指定なし">指定なし</option>' +
                         '                 <option value="推奨">推奨</option>' +
                         '                  <option value="義務">義務</option>' +

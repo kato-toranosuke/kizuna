@@ -90,3 +90,7 @@ d= ip.slice(12..14).to_i
 
 p (a+b) % 30  //15
 p (c+d) % 30  //1
+
+
+                <button class="button is-primary is-light "><%= @rest_name %></button>
+                <button class="button is-primary is-light " style=" outline: none;"><%= @rest_name %></button> 

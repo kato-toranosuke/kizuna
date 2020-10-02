@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bulma.min.css">
+    <title>ログイン | Kizuna</title>
+</head>
+
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+
+                <a href="/list" style="text-decoration: none;">
+                    <h1 class="title is-1 has-text-left">Kizuna</h1>
+                </a>
+                <%# <h1 class="title is-1 has-text-left">Kizuna</h1> %>
+                <!--h1 class="subtitle">~安心安全の外食をお届け~</h1-->
+                <h1 class="subtitle">~安心安全の外食のためのサイト~</h1>
+
+                みんなで更新する飲食店のウイルス感染対策情報サイト<br>
+                　　- マスク着用義務の有無、消毒液の有無など、コロナ禍で気になる最新情報をひとまとめ!<br>
+                　　- みんなでラクラク投稿! <br>
+                　　- 「最新情報」で、情報の更新過程が一目でわかる!<br>
+                </h6>
+
+
+            </div>
+        </div>
+    </section>
+    <%= @check %>
+    <div class="container">
+        <div class="box is-inline-block" style="  width: 80%; margin: 0 auto; max-width: 500px; margin-top: 20px;">
+        <%= form_with url: '/login', method: :post, local: true do |f| %>
+            <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                    <input class="input" name="email" type="email" placeholder="Email">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input" name="password" type="password" placeholder="Password">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control">
+                    <button class="button is-success">
+                        Login
+                    </button>
+                </p>
+            </div>
+        <% end %>
+        </div>
+         <div class="box is-inline-block" style="  width: 80%; margin: 0 auto; max-width: 500px; margin-top: 20px;">
+        <%= form_with url: '/login', method: :post, local: true do |f| %>
+            <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                    <input class="input" name="email" type="email" placeholder="Email">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input" name="password" type="password" placeholder="Password">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+                        <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input" name="password" type="password" placeholder="Password">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control">
+                    <button class="button is-warning">
+                        登録
+                    </button>
+                </p>
+            </div>
+        <% end %>
+        </div>
+    </div>
+</body>

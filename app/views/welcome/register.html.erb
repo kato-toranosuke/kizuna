@@ -26,10 +26,10 @@
                         <%= f.search_field :name_cont, class: "input" %>
                     </div>
 
-<div style="width: 20%; margin: auto 0 auto auto;">
-    <%= f.label :area, "エリア検索：" %>
-    <!--%= f.search_field :area_cont, class: "input" %-->
-</div>
+                    <div style="width: 20%; margin: auto 0 auto auto;">
+                        <%= f.label :area, "エリア検索：" %>
+                        <%= f.search_field :area_cont, class: "input" %>
+                    </div>
 
                     <br>
                     <%= f.label :mask, "マスク着用義務  " %>
@@ -57,20 +57,34 @@
     <div class="box is-inline-block" style=" vertical-align: top; width: 1000px; margin: 50px ;">
         <%= form_with url: '/register', method: :post, local: true do |f| %>
             <div class="field is-horizontal">
-                <div class="field-label is-normal">
+                <div class="field-label is-small">
                     <label class="label">店名</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input " name="name" type="text" placeholder="店名">
+                            <input class="input is-small" name="name" type="text" placeholder="店名">
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-small">
+                    <label class="label">エリア名</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-small" name="area" type="text" placeholder="エリア名">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <br />
             <div class="field is-horizontal">
-                <div class="field-label is-normal">
+                <div class="field-label  is-small">
                     <label class="label">
                         <span class="icon">
                             <i class="fas fa-head-side-mask"></i>
@@ -80,7 +94,7 @@
                 <div class="field-body">
                     <div class="field is-narrow">
                         <div class="control">
-                            <div class="select is-fullwidth">
+                            <div class="select is-fullwidth is-small">
                                 <select name="mask">
                                     <option value="指定なし">指定なし</option>
                                     <option value="義務">義務</option>
@@ -92,7 +106,7 @@
                 </div>
         </div>
         <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label  is-small">
                 <label class="label">
                     <span class="icon">
                         <i class="fas fa-thermometer-three-quarters"></i>
@@ -101,7 +115,7 @@
             <div class="field-body">
                 <div class="field is-narrow">
                     <div class="control">
-                        <div class="select is-fullwidth">
+                        <div class="select is-fullwidth is-small">
                             <select name="temp">
                                 <option value="なし">なし</option>
                                 <option value="なし">あり</option>
@@ -112,7 +126,7 @@
             </div>
         </div>
         <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label  is-small">
                 <label class="label">
                     <span class="icon">
                         <i class="fas fa-pump-medical"></i>
@@ -121,7 +135,7 @@
             <div class="field-body">
                 <div class="field is-narrow">
                     <div class="control">
-                        <div class="select is-fullwidth">
+                        <div class="select is-fullwidth is-small">
                             <select name="alcohol">
                                 <option value="なし">なし</option>
                                 <option value="あり(推奨)">あり(推奨)</option>
@@ -133,7 +147,7 @@
             </div>
         </div>
         <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label  is-small">
                 <label class="label">
                     <span class="icon">
                         <i class="fas fa-shopping-bag"></i>
@@ -142,7 +156,7 @@
             <div class="field-body">
                 <div class="field is-narrow">
                     <div class="control">
-                        <div class="select is-fullwidth">
+                        <div class="select is-fullwidth is-small">
                             <select name="takeout">
                                 <option value="なし">なし</option>
                                 <option value="あり(公式HPに記載なし)">あり(公式HPに記載なし)</option>
@@ -154,8 +168,8 @@
             </div>
         </div>
         <div class="field is-horizontal">
-            <div class="field-label is-normal">
-                <label class="label">
+            <div class="field-label is-small">
+                <label class="label ">
                     <span class="icon">
                         <i class="far fa-clock"></i>
                     </span> 月曜日</label>
@@ -163,13 +177,13 @@
             <div class="field-body">
                 <div class="field is-narrow">
                     <div class="control">
-                        <input class="input" name="monday" type="text" placeholder="8:00~14:00, 18:00~21:00"">
+                        <input class="input is-small" name="monday" type="text" placeholder="8:00~14:00, 18:00~21:00">
                     </div>
                 </div>
             </div>
         </div>
                 <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label is-small">
                 <label class="label">
                     <span class="icon">
                         <i class="far fa-clock"></i>
@@ -178,13 +192,13 @@
             <div class="field-body">
                 <div class="field is-narrow">
                     <div class="control">
-                        <input class="input" name="tuesday" type="text" placeholder="8:00~14:00, 18:00~21:00"">
+                        <input class="input is-small" name="tuesday" type="text" placeholder="8:00~14:00, 18:00~21:00">
                     </div>
                 </div>
             </div>
         </div>
                 <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label is-small">
                 <label class="label">
                     <span class="icon">
                         <i class="far fa-clock"></i>
@@ -193,13 +207,13 @@
             <div class="field-body">
                 <div class="field is-narrow">
                     <div class="control">
-                        <input class="input" name="wednesday" type="text" placeholder="8:00~14:00, 18:00~21:00"">
+                        <input class="input is-small" name="wednesday" type="text" placeholder="8:00~14:00, 18:00~21:00">
                     </div>
                 </div>
             </div>
         </div>
                 <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label is-small">
                 <label class="label">
                     <span class="icon">
                         <i class="far fa-clock"></i>
@@ -208,13 +222,13 @@
             <div class="field-body">
                 <div class="field is-narrow">
                     <div class="control">
-                        <input class="input" name="thursday" type="text" placeholder="8:00~14:00, 18:00~21:00"">
+                        <input class="input is-small" name="thursday" type="text" placeholder="8:00~14:00, 18:00~21:00">
                     </div>
                 </div>
             </div>
         </div>
                 <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label is-small">
                 <label class="label">
                     <span class="icon">
                         <i class="far fa-clock"></i>
@@ -223,13 +237,13 @@
             <div class="field-body">
                 <div class="field is-narrow">
                     <div class="control">
-                        <input class="input" name="friday" type="text" placeholder="8:00~14:00, 18:00~21:00"">
+                        <input class="input is-small" name="friday" type="text" placeholder="8:00~14:00, 18:00~21:00">
                     </div>
                 </div>
             </div>
         </div>
                 <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label is-small">
                 <label class="label">
                     <span class="icon">
                         <i class="far fa-clock"></i>
@@ -238,13 +252,13 @@
             <div class="field-body">
                 <div class="field is-narrow">
                     <div class="control">
-                        <input class="input" name="saturday" type="text" placeholder="8:00~14:00, 18:00~21:00"">
+                        <input class="input is-small" name="saturday" type="text" placeholder="8:00~14:00, 18:00~21:00">
                     </div>
                 </div>
             </div>
         </div>
                 <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label is-small">
                 <label class="label">
                     <span class="icon">
                         <i class="far fa-clock"></i>
@@ -253,14 +267,64 @@
             <div class="field-body">
                 <div class="field is-narrow">
                     <div class="control">
-                        <input class="input" name="sunday" type="text" placeholder="8:00~14:00, 18:00~21:00"">
+                        <input class="input is-small" name="sunday" type="text" placeholder="8:00~14:00, 18:00~21:00">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+         <div class="field is-horizontal">
+            <div class="field-label is-small">
+                <label class="label">
+                    <span class="icon">
+                        <i class="far fa-credit-card"></i>
+                    </span> 電子マネー</label>
+            </div>
+            <div class="field-body">
+                <div class="field is-narrow">
+                    <div class="control">
+                        <input class="input is-small" name="elec" type="text" placeholder="楽天Edy, Nanaco">
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="field is-horizontal">
+            <div class="field-label is-small">
+                <label class="label">
+                    <span class="icon">
+                        <i class="fas fa-credit-card"></i>
+                    </span> クレジットカード</label>
+            </div>
+            <div class="field-body">
+                <div class="field is-narrow">
+                    <div class="control">
+                        <input class="input is-small" name="card" type="text" placeholder="VISA, MasterCard">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-small">
+                <label class="label">
+                    <span class="icon">
+                        <i class="fas fa-qrcode"></i>
+                    </span> QRコード決済</label>
+            </div>
+            <div class="field-body">
+                <div class="field is-narrow">
+                    <div class="control">
+                        <input class="input is-small" name="qr" type="text" placeholder="PayPay, LINE Pay">
                     </div>
                 </div>
             </div>
         </div>
         <br />
+
+
+
+
         <div class=" field is-horizontal">
-                        <div class="field-label is-normal">
+                        <div class="field-label is-small">
                             <label class="label">
                                 <span class="icon">
                                     <i class="fab fa-google"></i>
@@ -269,14 +333,14 @@
                         <div class="field-body">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input " name="googlemap" type="text" placeholder="URL">
+                                    <input class="input is-small" name="googlemap" type="text" placeholder="URL">
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="field is-horizontal">
-                        <div class="field-label is-normal">
+                        <div class="field-label is-small">
                             <label class="label">
                                 <span class="icon">
                                     <i class="fas fa-utensils"></i>
@@ -285,7 +349,7 @@
                         <div class="field-body">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input " name="tabelog" type="text" placeholder="URL">
+                                    <input class="input is-small" name="tabelog" type="text" placeholder="URL">
                                 </div>
                             </div>
                         </div>
@@ -293,7 +357,7 @@
 
 
                     <div class="field is-horizontal">
-                        <div class="field-label is-normal">
+                        <div class="field-label is-small">
                             <label class="label">
                                 <span class="icon">
                                     <i class="fas fa-home"></i>
@@ -302,7 +366,7 @@
                         <div class="field-body">
                             <div class="field">
                                 <div class="control">
-                                    <input class="input " name="homepage" type="text" placeholder="URL">
+                                    <input class="input is-small" name="homepage" type="text" placeholder="URL">
                                 </div>
                             </div>
                         </div>
@@ -354,7 +418,7 @@
                     <br />
                     <br />
 
-<h6>エリア:<% st.area %>
+                    <h6>エリア:<%= st.area %></h6>
 
                     <h6>
                         <span class="icon">
@@ -423,6 +487,24 @@
                             <i class="far fa-clock"></i>
                         </span>
                         日曜日：<%= st.sunday%>
+                    </h6>
+                    <h6>
+                        <span class="icon">
+                            <i class="far fa-credit-card"></i>
+                        </span>
+                        電子マネー：<%= st.elec%>
+                    </h6>
+                    <h6>
+                        <span class="icon">
+                            <i class="fas fa-credit-card"></i>
+                        </span>
+                        クレジットカード：<%= st.card%>
+                    </h6>
+                    <h6>
+                        <span class="icon">
+                            <i class="fas fa-qrcode"></i>
+                        </span>
+                        QRコード決済：<%= st.qr%>
                     </h6>
                     <span class="icon">
                         <i class="fab fa-google"></i>
