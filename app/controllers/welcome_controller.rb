@@ -23,7 +23,7 @@ class WelcomeController < ApplicationController
   require './app/viewclass/hoge'
 
   def login
-    RegisterMailer.just_send().deliver
+    @mail=RegisterMailer.just_send.deliver
     # hoge = Hoge.new
     # @check=hoge.syori("Hello")
     # @check=params

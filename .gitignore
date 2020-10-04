@@ -67,3 +67,6 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 /public/uploads
+
+#メールのパスワード情報
+/config/environments/development.rb
