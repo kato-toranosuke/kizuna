@@ -25,7 +25,8 @@
                     　　- みんなでラクラク投稿! <br>
                     　　- 「最新情報」で、情報の更新過程が一目でわかる!<br>
                 </h6>
-
+                <button  class="button is-primary is-light "><%= link_to 'Sign up', "kizuna_user_models/sign_up" %></button>
+                <button  class="button is-primary is-light "><%= link_to 'Login', "kizuna_user_models/sign_in" %></button>
             <div class="has-text-right">
                 <%= search_form_for(@q, url: '/list', method: :get) do |f| %>
                     <div style="width: 20%; margin: auto 0 auto auto;">
