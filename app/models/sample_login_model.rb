@@ -1,0 +1,2 @@
+class SampleLoginModel < ApplicationRecord
+end

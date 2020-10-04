@@ -10,17 +10,15 @@
     <section class="hero is-primary">
         <div class="hero-body">
             <div class="container">
-
-            <div>
-            <%# app/assets/images %>
-            <%= image_tag "kizuna_3.png", alt: "kizuna ロゴ", width: "300px" %>
-            </div>
-
-                <a href="/list" style="text-decoration: none;"><h1 class="title is-1 has-text-left">Kizuna</h1></a>
-                <%# <h1 class="title is-1 has-text-left">Kizuna</h1> %>
-                <!--h1 class="subtitle">~安心安全の外食をお届け~</h1-->
-                <h1 class="subtitle">~安心安全の外食のためのサイト~</h1>
-
+                <div>
+                    <%# app/assets/images %>
+                    <%= image_tag "kizuna_3.png", alt: "kizuna ロゴ", width: "300px" %>
+                </div>
+                <a href="/list" style="text-decoration: none;">
+                    <h1 class="title is-1 has-text-left">Kizuna</h1>
+                </a>
+                <h1 class="subtitle">  ~安心安全の外食のためのサイト~</h1>
+                <h6>
                     みんなで更新する飲食店のウイルス感染対策情報サイト<br>
                     　　- マスク着用義務の有無、消毒液の有無など、コロナ禍で気になる最新情報をひとまとめ!<br>
                     　　- みんなでラクラク投稿! <br>
@@ -31,7 +29,7 @@
                 <%= search_form_for(@q, url: '/list', method: :get) do |f| %>
                     <div style="width: 20%; margin: auto 0 auto auto;">
                         <%= f.label :name, "店名検索：" %>
-                        <%= f.search_field :name_cont, class: "input" %>
+                        <%= f.search_field :name_cont_any, class: "input" %>
                     </div>
                     <div style="width: 20%; margin: auto 0 auto auto;">
                         <%= f.label :area, "エリア検索：" %>
@@ -61,18 +59,6 @@
     </section>
 
 <br>
-<h5>
-    　ヒット件数: 
-    <% if @all_hira == @all_kata then %> 
-        <%= @rests.count %>
-    <% else %> 
-        <%= @rests.count + @rests_2.count  %>
-    <% end %>
-    件
-</h5>
-
-<%= will_paginate @rests, :previous_label => '　　　&lt 前へ　', :next_label => '　次へ &gt'%>
-
     <% @rests.each do |rest| %>
     <div class="box is-inline-block" id="<%= rest.id %>" style=" vertical-align: top; width: 450px; margin: 12px ;">
         <a style="font-size: 25px; color: hsl(0, 0%, 21%);" href="/checkdata/<%= rest.id %>"><strong><%= rest.name%></strong></a>
@@ -81,7 +67,9 @@
         <h6>     
             <span class="icon">
                 <i class="fas fa-map-marker-alt"></i>
-            </span>エリア：<%= rest.area%></h6>
+            </span>
+            エリア：<%= rest.area%>
+        </h6>
         <h6>
             <span class="icon">
                 <i class="fas fa-head-side-mask"></i>
@@ -97,7 +85,8 @@
         <h6>
             <span class="icon">
                 <i class="fas fa-pump-medical"></i>
-            </span>消毒液：<%= rest.alcohol%>
+            </span>
+            消毒液：<%= rest.alcohol%>
         </h6>
         <h6>
             <span class="icon">
@@ -107,15 +96,13 @@
         </h6>
         <br/>
         <h6>
-
-                <h6>
             <span class="icon">
                 <i class="far fa-credit-card"></i>
             </span>
             電子マネー：<%= rest.elec%>
         </h6>
         <h6>
-          <span class="icon">
+            <span class="icon">
                 <i class="fas fa-credit-card"></i>
             </span>
             クレジットカード：<%= rest.card%>
@@ -178,7 +165,7 @@
             <span>最新情報</span>
         </button>
         <br /><br />
-        
+
         <% if rest.googlemap=='null' then %>
         <button class="button is-danger is-rounded is-small" style="color: hsl(347, 90%, 100%); background-color: hsl(347, 90%, 86%);">
             <span class="icon">
@@ -231,169 +218,6 @@
         <% end %>
     </div>
     <% end%>
-
-
-
-<br> <!--入力がカタカナ,ひらがなの場合　 -->
-<% if @all_hira != @all_kata then %> 
-
-    <% @rests_2.each do |rest_2| %>
-    <div class="box is-inline-block" id="<%= rest_2.id %>" style=" vertical-align: top; width: 450px; margin: 12px ;">
-        <a style="font-size: 25px; color: hsl(0, 0%, 21%);" href="/checkdata/<%= rest_2.id %>"><strong><%= rest_2.name%></strong></a>
-        <br /><br>
-
-        <h6>エリア：<%= rest_2.area%></h6>
-
-        <h6>
-            <span class="icon">
-                <i class="fas fa-head-side-mask"></i>
-            </span>
-            マスク：<%= rest_2.mask%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="fas fa-thermometer-three-quarters"></i>
-            </span>
-            検温：<%= rest_2.temp%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="fas fa-pump-medical"></i>
-            </span>消毒液：<%= rest_2.alcohol%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="fas fa-shopping-bag"></i>
-            </span>
-            テイクアウト：<%= rest_2.takeout%>
-        </h6>
-        <br/>
-
-        <h6>
-            <span class="icon">
-                <i class="far fa-credit-card"></i>
-            </span>
-            電子マネー：<%= rest_2.elec%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="fas fa-credit-card"></i>
-            </span>
-            クレジットカード：<%= rest_2.card%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="fas fa-qrcode"></i>
-            </span>
-            QRコード決済：<%= rest_2.qr%>
-        </h6>
-        <br/>
-
-        <h6>
-            <span class="icon">
-                <i class="far fa-clock"></i>
-            </span>
-            月曜日：<%= rest_2.monday%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="far fa-clock"></i>
-            </span>
-            火曜日：<%= rest_2.tuesday%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="far fa-clock"></i>
-            </span>
-            水曜日：<%= rest_2.wednesday%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="far fa-clock"></i>
-            </span>
-            木曜日：<%= rest_2.thursday%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="far fa-clock"></i>
-            </span>
-            金曜日：<%= rest_2.friday%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="far fa-clock"></i>
-            </span>
-            土曜日：<%= rest_2.saturday%>
-        </h6>
-        <h6>
-            <span class="icon">
-                <i class="far fa-clock"></i>
-            </span>
-            日曜日：<%= rest_2.sunday%>
-        </h6>
-        <br />
-        <button class="button is-primary is-rounded" onclick="location.href='/checkdata/<%= rest_2.id %>'">
-            <span class="icon">
-                <i class="fas fa-code-branch"></i>
-            </span>
-            <span>最新情報</span>
-        </button>
-        <br /><br />
-        
-        <% if rest_2.googlemap=='null' then %>
-        <button class="button is-danger is-rounded" style="color: hsl(347, 90%, 100%); background-color: hsl(347, 90%, 86%);">
-            <span class="icon">
-                <i class="fab fa-google"></i>
-            </span>
-            <span>Google Map</span>
-        </button>
-        <% else%>
-        <button class="button is-danger is-rounded" onclick="location.href='<%= rest_2.googlemap%>'">
-            <span class="icon">
-                <i class="fab fa-google"></i>
-            </span>
-            <span>Google Map</span>
-        </button>
-        <% end %>
-
-        <% if rest_2.tabelog=='null' then %>
-            <button class="button is-warning is-rounded" style="color: hsl(48, 100%, 100%); background-color: hsl(48, 100%, 80%)">
-                <span class="icon">
-                    <i class="fas fa-utensils"></i>
-                </span>
-                <span>食べログ</span>
-            </button>
-        <% else%>
-            <button class="button is-warning is-rounded"
-                onclick="location.href='<%= rest_2.tabelog %>' ">
-                <span class="icon">
-                    <i class="fas fa-utensils"></i>
-                </span>
-                <span>食べログ</span>
-            </button>
-        <% end %>
-
-       
-        <% if rest_2.homepage=='null' then %>
-            <button class="button is-success is-rounded"  style="color: hsl(142, 52%, 100%); background-color: hsl(142, 52%, 80%)">
-            <span class="icon">
-                <i class="fas fa-home"></i>
-            </span>
-            <span>公式HP</span>
-        </button>
-        <% else%>
-                <button class="button is-success is-rounded" onclick="location.href='<%= rest_2.homepage %>'" >
-            <span class="icon">
-                <i class="fas fa-home"></i>
-            </span>
-            <span>公式HP</span>
-        </button>
-
-        <% end %>
-    </div>
-    <% end%>
-
-<% end %>
 
 </body>
 </html>

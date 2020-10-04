@@ -20,7 +20,7 @@
                 <%# <h1 class="title is-1 has-text-left">Kizuna</h1> %>
                 <!--h1 class="subtitle">~安心安全の外食をお届け~</h1-->
                 <h1 class="subtitle">~安心安全の外食のためのサイト~</h1>
-
+                <h6>
                     みんなで更新する飲食店のウイルス感染対策情報サイト<br>
                     　　- マスク着用義務の有無、消毒液の有無など、コロナ禍で気になる最新情報をひとまとめ!<br>
                     　　- みんなでラクラク投稿! <br>
@@ -28,7 +28,7 @@
                 </h6>
 
             <div class="has-text-right">
-                <%= search_form_for(@q, url: '/list', method: :get) do |f| %>
+                <%= search_form_for(@q, url: '/prelist', method: :get) do |f| %>
                     <div style="width: 20%; margin: auto 0 auto auto;">
                         <%= f.label :name, "店名検索：" %>
                         <%= f.search_field :name_cont, class: "input" %>

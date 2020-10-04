@@ -23,9 +23,15 @@ class WelcomeController < ApplicationController
   require './app/viewclass/hoge'
 
   def login
+    RegisterMailer.just_send().deliver
     # hoge = Hoge.new
     # @check=hoge.syori("Hello")
-    @check=params
+    # @check=params
+    if params[:username].present? then
+      SampleLoginModel.create(username: params[:username], email: params[:email], password: params[:password])
+    end 
+    @check=SampleLoginModel.all
+
   end
 
   def update_ok
@@ -205,29 +211,14 @@ class WelcomeController < ApplicationController
   end
 
   def list
-
-
-    
-#    if  params[:q].present?
-#      @all_hira = params[:q]   #「あ」→「あ」、「ア」→「ア」
-
-      #破壊的メソッドを実行してもお互いに影響を及ぼさないようにコピー
-#      @all_kata = @all_hira.dup    
-
-      #「あ」→「ア」、「ア」→「あ」を検索
-#      @all_kata['name_cont'] = @all_kata['name_cont'].tr('ぁ-ん ァ-ン','ァ-ン ぁ-ん')
-      
-#      @q = RestModel.ransack(@all_hira)
-#      @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
-#      @q_2 = RestModel.ransack(@all_kata)
-#      @rests_2 = @q_2.result(distinct: true)
-
-#    else
-#      @all_hira = @all_kata 
-
-#      @q = RestModel.ransack(params[:q])
-#      @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
-#    end
+    if params[:q] != nil
+      params[:q]['name_cont_any'] = params[:q]['name_cont_any'].split(/[\p{blank}\s]+/)
+      @q = RestModel.ransack(params[:q])
+      @rests = @q.result
+    else
+      @q = RestModel.ransack(params[:q])
+      @rests = @q.result
+    end
   end
 
   def ok
@@ -626,6 +617,30 @@ class WelcomeController < ApplicationController
   end
 
   def about
+  end
+
+  #あとで消す
+  def prelist
+    if  params[:q].present?
+      @all_hira = params[:q]   #「あ」→「あ」、「ア」→「ア」
+ 
+      #破壊的メソッドを実行してもお互いに影響を及ぼさないようにコピー
+      @all_kata = @all_hira.dup    
+ 
+      #「あ」→「ア」、「ア」→「あ」を検索
+      @all_kata['name_cont'] = @all_kata['name_cont'].tr('ぁ-ん ァ-ン','ァ-ン ぁ-ん')
+       
+      @q = RestModel.ransack(@all_hira)
+      @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
+      @q_2 = RestModel.ransack(@all_kata)
+      @rests_2 = @q_2.result(distinct: true)
+ 
+    else
+      @all_hira = @all_kata 
+ 
+      @q = RestModel.ransack(params[:q])
+      @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
+    end
   end
 
 end

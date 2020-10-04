@@ -34,6 +34,11 @@ Rails.application.routes.draw do
   get 'login' => 'welcome#login'
   post 'login' => 'welcome#login'
 
+
+  # あとで消す
+  get 'prelist' => 'welcome#prelist'
+  post 'prelist' => 'welcome#prelist'
+
   #  resources :welcome do
     #  get :search, on: :collection
   #  end
