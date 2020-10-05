@@ -1,4 +1,51 @@
-<h2>Resend confirmation instructions</h2>
+ <section class="hero is-primary">
+   <div class="hero-body">
+     <div class="container">
+       <a href="/list" style="text-decoration: none;">
+         <h1 class="title is-1 has-text-left">Kizuna</h1>
+       </a>
+       <h1 class="subtitle"> ~安心安全の外食のためのサイト~</h1>
+       <h6>
+         みんなで更新する飲食店のウイルス感染対策情報サイト<br>
+       </h6>
+
+     </div>
+
+   </div>
+   </div>
+ </section>
+ <div class="container">
+   <div class="box is-inline-block" style="width: 80%; margin: 0 auto; max-width: 500px; margin-top: 20px;">
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+ <h3>Resend confirmation instructions</h3>
+     <div class="field">
+       <p class="control has-icons-left has-icons-right">
+         <%= f.email_field :email, autocomplete: "email" ,class: "input" , placeholder: "Email" %>
+         <!--%= f.email_field :email, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %-->
+         <span class="icon is-small is-left">
+           <i class="fas fa-envelope"></i>
+         </span>
+         <span class="icon is-small is-right">
+           <i class="fas fa-check"></i>
+         </span>
+       </p>
+
+     </div>
+
+     <div class="field">
+       <p class="control">
+         <button class="button is-primary is-light">
+Resend confirmation instructions
+         </button>
+       </p>
+     </div>
+     <% end %>
+<%= render "devise/shared/links" %>
+
+   </div>
+ </div>
+ <!--% <h2>Resend confirmation instructions</h2>
 
 <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -13,4 +60,4 @@
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= render "devise/shared/links" %> %-->

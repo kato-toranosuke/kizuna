@@ -18,7 +18,7 @@
    <div class="box is-inline-block" style="width: 80%; margin: 0 auto; max-width: 500px; margin-top: 20px;">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
      <%= render "devise/shared/error_messages", resource: resource %>
-     <div class="field">
+     <!--% <div class="field">
        <label class="label">Username</label>
        <div class="control has-icons-left has-icons-right">
          <input class="input" name="username" type="text" placeholder="Text input">
@@ -30,7 +30,7 @@
          </span>
        </div>
        <%# <p class="help is-success">This username is available</p> %>
-     </div>
+     </div> %-->
      <div class="field">
        <p class="control has-icons-left has-icons-right">
 
@@ -76,6 +76,8 @@
        </p>
      </div>
      <% end %>
+    <%= render "devise/shared/links" %>
+
    </div>
  </div>
 
@@ -108,4 +110,3 @@
    <%= f.submit "Sign up" %>
  </div>
  <% end %> -->
- <button class="button is-primary is-light "> <%= render "devise/shared/links" %></button>

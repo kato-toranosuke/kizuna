@@ -1,4 +1,110 @@
-<h2>Log in</h2>
+ <section class="hero is-primary">
+   <div class="hero-body">
+     <div class="container">
+       <a href="/list" style="text-decoration: none;">
+         <h1 class="title is-1 has-text-left">Kizuna</h1>
+       </a>
+       <h1 class="subtitle"> ~安心安全の外食のためのサイト~</h1>
+       <h6>
+         みんなで更新する飲食店のウイルス感染対策情報サイト<br>
+       </h6>
+
+     </div>
+
+   </div>
+   </div>
+ </section>
+ <div class="container">
+   <div class="box is-inline-block" style="width: 80%; margin: 0 auto; max-width: 500px; margin-top: 20px;">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+     <!--% <div class="field">
+       <label class="label">Username</label>
+       <div class="control has-icons-left has-icons-right">
+         <input class="input" name="username" type="text" placeholder="Text input">
+         <span class="icon is-small is-left">
+           <i class="fas fa-user"></i>
+         </span>
+         <span class="icon is-small is-right">
+           <i class="fas fa-check"></i>
+         </span>
+       </div>
+       <%# <p class="help is-success">This username is available</p> %>
+     </div> %-->
+     <div class="field">
+       <p class="control has-icons-left has-icons-right">
+
+         <%= f.email_field :email, autocomplete: "email" ,class: "input" , placeholder: "Email" %>
+         <span class="icon is-small is-left">
+           <i class="fas fa-envelope"></i>
+         </span>
+         <span class="icon is-small is-right">
+           <i class="fas fa-check"></i>
+         </span>
+       </p>
+
+     </div>
+
+     <div class="field">
+       <p class="control has-icons-left">
+
+   <%= f.password_field :password, autocomplete: "current-password", class: "input" , placeholder: "Password" %>
+         <%# <input class="input" name="password" type="password" placeholder="Password"> %>
+         <span class="icon is-small is-left">
+           <i class="fas fa-lock"></i>
+         </span>
+       </p>
+     </div>
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+  
+     <div class="field">
+       <p class="control">
+         <button class="button is-primary ">
+           Login
+         </button>
+       </p>
+     </div>
+     <% end %>
+<%= render "devise/shared/links" %>
+
+   </div>
+ </div>
+
+
+ <!--% <h2>Sign up</h2>
+ <button class="button is-primary is-light ">aaa</button>
+
+ <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+ <%= render "devise/shared/error_messages", resource: resource %>
+
+ <div class="field">
+   <%= f.label :email %><br />
+   <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "input"%>
+ </div>
+
+ <div class="field">
+   <%= f.label :password %>
+   <% if @minimum_password_length %>
+   <em>(<%= @minimum_password_length %> characters minimum)</em>
+   <% end %><br />
+   <%= f.password_field :password, autocomplete: "new-password" %>
+ </div>
+
+ <div class="field">
+   <%= f.label :password_confirmation %><br />
+   <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+ </div>
+
+ <div class="actions">
+   <%= f.submit "Sign up" %>
+ </div>
+ <% end %> -->
+
+<!--% <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
@@ -23,4 +129,4 @@
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<%= render "devise/shared/links" %> %-->

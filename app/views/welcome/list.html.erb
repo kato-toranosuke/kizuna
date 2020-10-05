@@ -7,14 +7,20 @@
 </head>
 
 <body>
-<div>test</div>
-    <section class="hero is-primary">
+<% if kizuna_user_model_signed_in? then %>
+ <section class="hero is-danger">
+<% else %>
+<%# <h2>false</h2> %>
+ <section class="hero is-primary">
+<% end %>
+
+   
         <div class="hero-body">
             <div class="container">
-                <div>
+                <!--% <div>
                     <%# app/assets/images %>
                     <%= image_tag "kizuna_3.png", alt: "kizuna ロゴ", width: "300px" %>
-                </div>
+                </div> %-->
                 <a href="/list" style="text-decoration: none;">
                     <h1 class="title is-1 has-text-left">Kizuna</h1>
                 </a>
@@ -61,6 +67,9 @@
     </section>
 
 <br>
+
+
+
     <% @rests.each do |rest| %>
     <div class="box is-inline-block" id="<%= rest.id %>" style=" vertical-align: top; width: 450px; margin: 12px ;">
         <a style="font-size: 25px; color: hsl(0, 0%, 21%);" href="/checkdata/<%= rest.id %>"><strong><%= rest.name%></strong></a>
