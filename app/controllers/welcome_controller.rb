@@ -23,7 +23,7 @@ class WelcomeController < ApplicationController
   require './app/viewclass/hoge'
 
   def login
-    RegisterMailer.just_send().deliver
+    @mail=RegisterMailer.just_send.deliver
     # hoge = Hoge.new
     # @check=hoge.syori("Hello")
     # @check=params
@@ -212,21 +212,15 @@ class WelcomeController < ApplicationController
 
   def list
     if params[:q] != nil
-      params[:q]['name_cont_any'] = params[:q]['name_cont_any'].split(/[\p{blank}\s]+/)
-
-#変換
-      params[:q]['name_cont_any'].push(params[:q]['name_cont_any'][0].tr('ぁ-ん ァ-ン','ァ-ン ぁ-ん'))
-
+      #name_cont_anyでor検索, name_cont_allでand検索
+      params[:q]['name_cont_all'] = params[:q]['name_cont_all'].split(/[\p{blank}\s]+/)
+      #変換
+      #params[:q]['name_cont_all'].push(params[:q]['name_cont_all'][0].tr('ぁ-ん ァ-ン','ァ-ン ぁ-ん'))
       @q = RestModel.ransack(params[:q])
-      @rests = @q.result
-
-#10/04分
-      #@q = RestModel.ransack({ combinator: 'or', groupings: { 'a' => {name_cont: keyword[0]}, 'b' => {name_cont: keyword[1]}} })
-      #@keyword = params[:q].split(' ')
-      #@rests = RestModel.ransack({ combinator: 'and', groupings: { 'a' => {name_cont: @keyword[0]}, 'b' => {name_cont: @keyword[1]}} }).result
+      @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 15)
     else
       @q = RestModel.ransack(params[:q])
-      @rests = @q.result
+      @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 15)
     end
   end
 
