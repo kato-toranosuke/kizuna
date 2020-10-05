@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_04_132634) do
+ActiveRecord::Schema.define(version: 2020_10_04_171103) do
 
   create_table "kizuna_user_models", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -20,6 +20,10 @@ ActiveRecord::Schema.define(version: 2020_10_04_132634) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["email"], name: "index_kizuna_user_models_on_email", unique: true
     t.index ["reset_password_token"], name: "index_kizuna_user_models_on_reset_password_token", unique: true
   end
