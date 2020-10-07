@@ -436,9 +436,9 @@ class WelcomeController < ApplicationController
                 if update_touch.blank?
                   touch_string=pre_user_input[:comment]+', '+touch_name
                 elsif update_touch.include?(touch_name)
-                  touch_string=update_touch+', '+pre_user_input[:comment]
+                  touch_string=pre_user_input[:comment]
                 elsif update_touch.present?
-                  touch_string=update_touch+', '+pre_user_input[:comment]+', '+touch_name
+                  touch_string=pre_user_input[:comment]+', '+touch_name
                 end
                 pre_user_input.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
               end              
