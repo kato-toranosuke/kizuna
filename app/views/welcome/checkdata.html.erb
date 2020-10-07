@@ -26,17 +26,58 @@
 </head>
 
 <body>
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
-                <a href="/list" style="text-decoration: none;"><h1 class="title is-1 has-text-left">Kizuna</h1></a>
-                <h1 class="subtitle">~安心安全の外食をお届け~</h1>
-            <div class="has-text-right">
+    <!-- Header -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+         <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <!-- Search Form -->
+                <form name="search_form" id="search_form" accept-charset="UTF-8">
+                    <div class="field has-addons">
+                        <!-- エリア・駅 -->
+                        <div class="control">
+                            <input class="input" type="text" placeholder="エリア・駅">
+                        </div>
+                        <!-- キーワード -->
+                        <div class="control">
+                            <input class="input" type="text" placeholder="キーワード">
+                        </div>
+                        <div class="control">
+                            <input class="input" type="date">
+                        </div>
+                        <div class="control">
+                            <input class="input" type="time">
+                        </div>
+                        <!-- 検索ボタン -->
+                        <div class="control">
+                            <a class="button is-info">Search</a>
+                        </div>
+                    </div>
+                </form>
             </div>
 
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary"><strong>Sign up</strong></a>
+                        <a class="button is-light">Log in</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </nav>
+    
     <div class="columns">
         <div class="scrolling-wrapper" id="wrp">
 
