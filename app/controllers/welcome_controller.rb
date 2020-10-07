@@ -213,12 +213,14 @@ class WelcomeController < ApplicationController
   def list
     if params[:q] != nil
       #name_cont_anyでor検索, name_cont_allでand検索
-      params[:q]['name_cont_all'] = params[:q]['name_cont_all'].split(/[\p{blank}\s]+/)
+      if params[:q]['name_cont_all'] != nil  
+        params[:q]['name_cont_all'] = params[:q]['name_cont_all'].split(/[\p{blank}\s]+/)
+      end
       #変換
       #params[:q]['name_cont_all'].push(params[:q]['name_cont_all'][0].tr('ぁ-ん ァ-ン','ァ-ン ぁ-ん'))
       @q = RestModel.ransack(params[:q])
       @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 15)
-    else
+    else #初期画面
       @q = RestModel.ransack(params[:q])
       @rests = @q.result(distinct: true).paginate(page: params[:page], per_page: 15)
     end
