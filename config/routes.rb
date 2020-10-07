@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :kizuna_user_models
+  # devise_for :kizuna_user_models
   root 'welcome#list'
 
 
