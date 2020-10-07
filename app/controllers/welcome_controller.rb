@@ -375,7 +375,10 @@ class WelcomeController < ApplicationController
       b=Digest::SHA3.hexdigest(strip)   
       @nickname=front[f.hex%30]+back[b.hex%30]+"さん"
       while i < params[:item].length do
-        
+        others_elec_num=0
+        others_card_num=0
+        others_qr_num=0
+
         if params[:item][i]=='電子マネー' || params[:item][i]=='クレジットカード' || params[:item][i]=='QRコード決済' then
           touch_item = params[:item][i]
           touch_comment=params[:comment][i]
@@ -392,17 +395,25 @@ class WelcomeController < ApplicationController
             end
 
           if params[:comment][i]=='追加' then
-            if touch_name=='その他' then
-              if params[:item][i]=='電子マネー' then
-                touch_name=params[:elec_others][i]
-              elsif params[:item][i]=='クレジットカード' then
-                touch_name=params[:card_others][i]
-              elsif params[:item][i]=='QRコード決済' then
-                 touch_name=params[:qr_others][i]
+            if params[:item][i]=='電子マネー' then
+              if params[:elec][i]=='その他' then
+                touch_name=params[:elec_others][others_elec_num]
+                others_elec_num+=1
               end
             end
-            pre_user_input=SampleUserModel.find_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, touch_item)
-              
+            if params[:item][i]=='クレジットカード' then
+              if params[:card][i]=='その他' then
+                touch_name=params[:card_others][others_card_num]
+                others_card_num+=1
+              end
+            end
+            if params[:item][i]=='QRコード決済' then
+              if params[:qr][i]=='その他' then
+                touch_name=params[:qr_others][others_qr_num]
+                others_qr_num+=1
+              end
+            end
+            pre_user_input=SampleUserModel.where('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, touch_item).order(updated_at: :desc).limit(1)[0]
             # 同じユーザの以前までの入力をチェック
               # 以前までの入力なし
               if pre_user_input.blank? then
@@ -417,6 +428,7 @@ class WelcomeController < ApplicationController
                   touch_string=update_touch+', '+touch_name
                 end
                 SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+                # SampleUserModel.find_or_initialize_by(rest: params[:restid].to_i,item: params[:item][i], ipaddress: request.remote_ip).update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
 
               elsif pre_user_input[:comment].blank? then
                 # 前回の更新情報はnull?
@@ -429,8 +441,11 @@ class WelcomeController < ApplicationController
                 elsif update_touch.present?
                   touch_string=update_touch+', '+touch_name
                 end
-                SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
-              # 以前までの入力と同じこと言ってる
+
+                # SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+                pre_user_input.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+
+                # 以前までの入力と同じこと言ってる
               elsif pre_user_input[:comment].include?(touch_name) then
                 @donothing="do nothing"
               # 以前までとは違う入力
@@ -448,17 +463,25 @@ class WelcomeController < ApplicationController
 
 
           elsif params[:comment][i]=='削除' then
-            if touch_name=='その他' then
-              if params[:item][i]=='電子マネー' then
-                touch_name=params[:elec_others][i]
-              elsif params[:item][i]=='クレジットカード' then
-                touch_name=params[:card_others][i]
-              elsif params[:item][i]=='QRコード決済' then
-                 touch_name=params[:qr_others][i]
+            if params[:item][i]=='電子マネー' then
+              if params[:elec][i]=='その他' then
+                touch_name=params[:elec_others][others_elec_num]
+                others_elec_num+=1
               end
             end
-
-              pre_user_input=SampleUserModel.find_by('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, params[:item][i])
+            if params[:item][i]=='クレジットカード' then
+              if params[:card][i]=='その他' then
+                touch_name=params[:card_others][others_card_num]
+                others_card_num+=1
+              end
+            end
+            if params[:item][i]=='QRコード決済' then
+              if params[:qr][i]=='その他' then
+                touch_name=params[:qr_others][others_qr_num]
+                others_qr_num+=1
+              end
+            end
+            pre_user_input=SampleUserModel.where('created_at > ? and rest = ? and ipaddress = ? and item = ?', @upmax_created, params[:restid].to_i, request.remote_ip, touch_item).order(updated_at: :desc).limit(1)[0]
               
               # 同じユーザの以前までの入力をチェック
               # 以前までの入力なし
@@ -480,6 +503,7 @@ class WelcomeController < ApplicationController
                   # touch_string=update_touch+', '+touch_name
                 end
                 SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+                # SampleUserModel.find_or_initialize_by(rest: params[:restid].to_i,item: params[:item][i], ipaddress: request.remote_ip).update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
 
               elsif pre_user_input[:comment].blank? then
                 # 前回の更新情報はnull?
@@ -498,7 +522,8 @@ class WelcomeController < ApplicationController
                   @donothing="do nothing"
                   # touch_string=update_touch+', '+touch_name
                 end
-                SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+                pre_user_input.update_attributes(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
+                # SampleUserModel.create(rest: params[:restid].to_i,item: params[:item][i], comment: touch_string, ipaddress: request.remote_ip, nickname: @nickname)
               # 以前までの入力に含まれる
               elsif pre_user_input[:comment].include?(touch_name) then
                 # @donothing="do nothing"
