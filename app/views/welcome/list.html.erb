@@ -3,10 +3,125 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kizuna -安心安全の外食のためのサイト-</title>
+
+    <style type="text/css">
+      .scrolling-wrapper {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+      }
+
+      .scrolling-wrapper .item {
+        display: inline-block;
+      }
+
+      #plus {
+        border-radius: 30px;
+        margin: 10px 10px 20px 20px;
+      }
+
+      #header {
+        /* background-color: brown; */
+      }
+
+      #search_form {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+      }
+
+      .navbar-menu {
+        /* padding-top: 1rem; */
+      }
+
+      .column{
+        /* background-color: brown; */
+      }
+
+      .search_entries_container {
+        border: solid 1px black;
+        margin-bottom: 20px;
+      }
+
+      .search_entry_container{
+        margin-bottom: 10px;
+      }
+
+      .search_entry_container > .header{
+        background-color: #999999;
+        color: white;
+        padding: 3px;
+        font-size: 1.2rem;
+      }
+
+      .search_entry_container > .content{
+        padding: 3px;
+      }
+
+      .search_entry_container > .content > label {
+        margin-left: 1ch;
+        margin-right: 2ch;
+      }
+    </style>
 </head>
 
 <body>
+    <!-- Header -->
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation" id="header">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+          <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+          data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <!-- <div class="navbar-start"> -->
+        <div id="search_form">
+          <!-- Search Form -->
+          <form name="search_form" accept-charset="UTF-8">
+            <div class="field has-addons">
+              <!-- エリア・駅 -->
+              <div class="control">
+                <input class="input" type="text" placeholder="エリア・駅">
+              </div>
+              <!-- キーワード -->
+              <div class="control">
+                <input class="input" type="text" placeholder="キーワード">
+              </div>
+              <div class="control">
+                <input class="input" type="date">
+              </div>
+              <div class="control">
+                <input class="input" type="time">
+              </div>
+              <!-- 検索ボタン -->
+              <div class="control">
+                <a class="button is-primary">Search</a>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-primary"><strong>Sign up</strong></a>
+              <a class="button is-light">Log in</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
     <section class="hero is-primary">
         <div class="hero-body">
             <div class="container">
@@ -55,6 +170,125 @@
             </div>
         </div>
     </section>
+
+    <main class="section">
+      <div class="container">
+        <div>dummy</div>
+        <div class="columns">
+          <div class="column is-narrow">
+            <div class="search_entries_container">
+              <div class="search_entry_container">
+                <div class="header">マスク</div>
+                <div class="content">
+                  <label class="checkbox">
+                    <input type="checkbox">
+                      義務
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                      推奨
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                      指定なし
+                  </label>
+                </div>
+              </div>
+              <div class="search_entry_container">
+                <div class="header">検温</div>
+                <div class="content">
+                  <label class="checkbox">
+                    <input type="checkbox">
+                      義務
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                      推奨
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                      指定なし
+                  </label>
+                </div>
+              </div>
+              <div class="search_entry_container">
+                <div class="header">消毒液</div>
+                <div class="content">
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    義務
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    推奨
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    指定なし
+                  </label>
+                </div>
+              </div>
+              <div class="search_entry_container">
+                <div class="header">テイクアウト</div>
+                <div class="content">
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    義務
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="search_entries_container">
+              <div class="search_entry_container">
+                <div class="header">電子マネー</div>
+                <div class="content">
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    iD
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    QuickPay
+                  </label>
+                </div>
+              </div>
+              <div class="search_entry_container">
+                <div class="header">クレジットカード</div>
+                <div class="content">
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    VISA
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    Master
+                  </label>
+                </div>
+              </div>
+              <div class="search_entry_container">
+                <div class="header">QRコード決済</div>
+                <div class="content">
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    LINE Pay
+                  </label>
+                  <label class="checkbox">
+                    <input type="checkbox">
+                    QuickPay
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button class="button is-rounded is-fullwidth">絞り込む</button>
+          </div>
+          <div class="column">
+            items
+          </div>
+        </div>
+      </div>
+    </main>
 
     <% @rests.each do |rest| %>
     <div class="box is-inline-block" id="<%= rest.id %>" style=" vertical-align: top; width: 450px; margin: 12px ;">
@@ -329,5 +563,33 @@
 
 <% end %>
 
+    <!-- for Bulma -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+
+          // Add a click event on each of them
+          $navbarBurgers.forEach(el => {
+            el.addEventListener('click', () => {
+
+              // Get the target from the "data-target" attribute
+              const target = el.dataset.target;
+              const $target = document.getElementById(target);
+
+              // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+              el.classList.toggle('is-active');
+              $target.classList.toggle('is-active');
+
+            });
+          });
+        }
+
+      });
+    </script>
 </body>
 </html>
